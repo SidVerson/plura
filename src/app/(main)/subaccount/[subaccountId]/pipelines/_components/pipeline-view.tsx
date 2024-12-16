@@ -1,18 +1,14 @@
 'use client'
 import LaneForm from '@/components/forms/lane-form'
 import CustomModal from '@/components/global/custom-modal'
-import { Button } from '@/components/ui/button'
-import {
-  LaneDetail,
-  PipelineDetailsWithLanesCardsTagsTickets,
-  TicketAndTags,
-} from '@/lib/types'
-import { useModal } from '@/providers/modal-provider'
-import { Lane, Ticket } from '@prisma/client'
-import { Flag, Plus } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
+import {Button} from '@/components/ui/button'
+import {LaneDetail, PipelineDetailsWithLanesCardsTagsTickets, TicketAndTags,} from '@/lib/types'
+import {useModal} from '@/providers/modal-provider'
+import {Lane, Ticket} from '@prisma/client'
+import {Flag, Plus} from 'lucide-react'
+import {useRouter} from 'next/navigation'
+import React, {useEffect, useState} from 'react'
+import {DragDropContext, Droppable, DropResult} from 'react-beautiful-dnd'
 import PipelineLane from './pipeline-lane'
 
 type Props = {
@@ -51,8 +47,8 @@ const PipelineView = ({
   const handleAddLane = () => {
     setOpen(
       <CustomModal
-        title=" Create A Lane"
-        subheading="Lanes allow you to group tickets"
+        title="Создайте поток"
+        subheading="Потоки позволяют группировать тикеты"
       >
         <LaneForm pipelineId={pipelineId} />
       </CustomModal>
@@ -143,7 +139,7 @@ const PipelineView = ({
             onClick={handleAddLane}
           >
             <Plus size={15} />
-            Create Lane
+            Создать поток
           </Button>
         </div>
         <Droppable

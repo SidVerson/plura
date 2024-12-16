@@ -1,8 +1,8 @@
 'use client'
 import ContactUserForm from '@/components/forms/contact-user-form'
 import CustomModal from '@/components/global/custom-modal'
-import { Button } from '@/components/ui/button'
-import { useModal } from '@/providers/modal-provider'
+import {Button} from '@/components/ui/button'
+import {useModal} from '@/providers/modal-provider'
 import React from 'react'
 
 type Props = {
@@ -15,15 +15,15 @@ const CraeteContactButton = ({ subaccountId }: Props) => {
   const handleCreateContact = async () => {
     setOpen(
       <CustomModal
-        title="Create Or Update Contact information"
-        subheading="Contacts are like customers."
+        title="Создайте или обновите контактную информацию"
+        subheading="Контакты - это как клиенты."
       >
         <ContactUserForm subaccountId={subaccountId} />
       </CustomModal>
     )
   }
 
-  return <Button onClick={handleCreateContact}>Create Contact</Button>
+  return <Button className={'mb-2'} onClick={handleCreateContact}>Создать контакт</Button>
 }
 
 export default CraeteContactButton

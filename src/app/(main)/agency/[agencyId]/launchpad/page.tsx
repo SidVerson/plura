@@ -1,18 +1,12 @@
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { db } from '@/lib/db'
-import { getStripeOAuthLink } from '@/lib/utils'
-import { CheckCircleIcon } from 'lucide-react'
+import {Button} from '@/components/ui/button'
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from '@/components/ui/card'
+import {db} from '@/lib/db'
+import {getStripeOAuthLink} from '@/lib/utils'
+import {CheckCircleIcon} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { stripe } from '@/lib/stripe'
+import {stripe} from '@/lib/stripe'
 
 type Props = {
   params: {
@@ -70,9 +64,9 @@ const LaunchPadPage = async ({ params, searchParams }: Props) => {
       <div className="w-full h-full max-w-[800px]">
         <Card className="border-none">
           <CardHeader>
-            <CardTitle>Lets get started!</CardTitle>
+            <CardTitle>Давайте начнем!</CardTitle>
             <CardDescription>
-              Follow the steps below to get your account setup.
+              Выполните следующие действия, чтобы настроить свою учетную запись.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
@@ -85,9 +79,9 @@ const LaunchPadPage = async ({ params, searchParams }: Props) => {
                   width={80}
                   className="rounded-md object-contain"
                 />
-                <p> Save the website as a shortcut on your mobile device</p>
+                <p> Сохраните веб-сайт в качестве ярлыка на своем мобильном устройстве</p>
               </div>
-              <Button>Start</Button>
+              <Button>Начать</Button>
             </div>
             <div className="flex justify-between items-center w-full border p-4 rounded-lg gap-2">
               <div className="flex md:items-center gap-4 flex-col md:!flex-row">
@@ -99,8 +93,8 @@ const LaunchPadPage = async ({ params, searchParams }: Props) => {
                   className="rounded-md object-contain"
                 />
                 <p>
-                  Connect your stripe account to accept payments and see your
-                  dashboard.
+                  Подключите свой аккаунт stripe, чтобы принимать платежи и видеть дашборд
+
                 </p>
               </div>
               {agencyDetails.connectAccountId || connectedStripeAccount ? (
@@ -113,7 +107,7 @@ const LaunchPadPage = async ({ params, searchParams }: Props) => {
                   className="bg-primary py-2 px-4 rounded-md text-white"
                   href={stripeOAuthLink}
                 >
-                  Start
+                  Начать
                 </Link>
               )}
             </div>
@@ -126,7 +120,8 @@ const LaunchPadPage = async ({ params, searchParams }: Props) => {
                   width={80}
                   className="rounded-md object-contain"
                 />
-                <p> Fill in all your bussiness details</p>
+                <p> Заполните все данные о вашем предприятии
+                </p>
               </div>
               {allDetailsExist ? (
                 <CheckCircleIcon
@@ -138,7 +133,7 @@ const LaunchPadPage = async ({ params, searchParams }: Props) => {
                   className="bg-primary py-2 px-4 rounded-md text-white"
                   href={`/agency/${params.agencyId}/settings`}
                 >
-                  Start
+                  Начать
                 </Link>
               )}
             </div>

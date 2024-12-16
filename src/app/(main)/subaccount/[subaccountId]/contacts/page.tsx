@@ -1,17 +1,10 @@
 import BlurPage from '@/components/global/blur-page'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { db } from '@/lib/db'
-import { Contact, SubAccount, Ticket } from '@prisma/client'
-import format from 'date-fns/format'
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar'
+import {Badge} from '@/components/ui/badge'
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from '@/components/ui/table'
+import {db} from '@/lib/db'
+import {Contact, SubAccount, Ticket} from '@prisma/client'
+import {format} from 'date-fns/format'
 import React from 'react'
 import CraeteContactButton from './_components/create-contact-btn'
 
@@ -63,16 +56,16 @@ const ContactPage = async ({ params }: Props) => {
   }
   return (
     <BlurPage>
-      <h1 className="text-4xl p-4">Contacts</h1>
+      <h1 className="text-4xl p-4">Контакты</h1>
       <CraeteContactButton subaccountId={params.subaccountId} />
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[200px]">Name</TableHead>
+            <TableHead className="w-[200px]">Имя</TableHead>
             <TableHead className="w-[300px]">Email</TableHead>
-            <TableHead className="w-[200px]">Active</TableHead>
-            <TableHead>Created Date</TableHead>
-            <TableHead className="text-right">Total Value</TableHead>
+            <TableHead className="w-[200px]">Активность</TableHead>
+            <TableHead>Создано</TableHead>
+            <TableHead className="text-right">Общая сумма</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="font-medium truncate">
@@ -89,9 +82,9 @@ const ContactPage = async ({ params }: Props) => {
               <TableCell>{contact.email}</TableCell>
               <TableCell>
                 {formatTotal(contact.Ticket) === '$0.00' ? (
-                  <Badge variant={'destructive'}>Inactive</Badge>
+                  <Badge variant={'destructive'}>Не активен</Badge>
                 ) : (
-                  <Badge className="bg-emerald-700">Active</Badge>
+                  <Badge className="bg-emerald-700">Активен</Badge>
                 )}
               </TableCell>
               <TableCell>{format(contact.createdAt, 'MM/dd/yyyy')}</TableCell>

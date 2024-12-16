@@ -1,22 +1,15 @@
 'use client'
-import { NotificationWithUser } from '@/lib/types'
-import { UserButton } from '@clerk/nextjs'
-import React, { useState } from 'react'
-import { twMerge } from 'tailwind-merge'
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '../ui/sheet'
-import { Bell } from 'lucide-react'
-import { Role } from '@prisma/client'
-import { Card } from '../ui/card'
-import { Switch } from '../ui/switch'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { ModeToggle } from './mode-toggle'
+import {NotificationWithUser} from '@/lib/types'
+import {UserButton} from '@clerk/nextjs'
+import React, {useState} from 'react'
+import {twMerge} from 'tailwind-merge'
+import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger,} from '../ui/sheet'
+import {Bell} from 'lucide-react'
+import {Role} from '@prisma/client'
+import {Card} from '../ui/card'
+import {Switch} from '../ui/switch'
+import {Avatar, AvatarFallback, AvatarImage} from '../ui/avatar'
+import {ModeToggle} from './mode-toggle'
 
 type Props = {
   notifications: NotificationWithUser | []
@@ -61,11 +54,11 @@ const InfoBar = ({ notifications, subAccountId, className, role }: Props) => {
             </SheetTrigger>
             <SheetContent className="mt-4 mr-4 pr-4 overflow-scroll">
               <SheetHeader className="text-left">
-                <SheetTitle>Notifications</SheetTitle>
+                <SheetTitle>Уведомления</SheetTitle>
                 <SheetDescription>
                   {(role === 'AGENCY_ADMIN' || role === 'AGENCY_OWNER') && (
                     <Card className="flex items-center justify-between p-4">
-                      Current Subaccount
+                      Текущий субаккаунт
                       <Switch onCheckedChange={handleClick} />
                     </Card>
                   )}
@@ -110,7 +103,7 @@ const InfoBar = ({ notifications, subAccountId, className, role }: Props) => {
                   className="flex items-center justify-center text-muted-foreground"
                   mb-4
                 >
-                  You have no notifications
+                  У вас нет уведомлений
                 </div>
               )}
             </SheetContent>

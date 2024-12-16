@@ -1,27 +1,13 @@
 'use server'
 
-import { clerkClient, currentUser } from '@clerk/nextjs'
-import { db } from './db'
-import { redirect } from 'next/navigation'
-import {
-  Agency,
-  Lane,
-  Plan,
-  Prisma,
-  Role,
-  SubAccount,
-  Tag,
-  Ticket,
-  User,
-} from '@prisma/client'
-import { v4 } from 'uuid'
-import {
-  CreateFunnelFormSchema,
-  CreateMediaType,
-  UpsertFunnelPage,
-} from './types'
-import { z } from 'zod'
-import { revalidatePath } from 'next/cache'
+import {clerkClient, currentUser} from '@clerk/nextjs'
+import {db} from './db'
+import {redirect} from 'next/navigation'
+import {Agency, Lane, Plan, Prisma, Role, SubAccount, Tag, Ticket, User,} from '@prisma/client'
+import {v4} from 'uuid'
+import {CreateFunnelFormSchema, CreateMediaType, UpsertFunnelPage,} from './types'
+import {z} from 'zod'
+import {revalidatePath} from 'next/cache'
 
 export const getAuthUserDetails = async () => {
   const user = await currentUser()
@@ -251,32 +237,32 @@ export const upsertAgency = async (agency: Agency, price?: Plan) => {
         SidebarOption: {
           create: [
             {
-              name: 'Dashboard',
+              name: 'Дашборд',
               icon: 'category',
               link: `/agency/${agency.id}`,
             },
             {
-              name: 'Launchpad',
+              name: 'Главная',
               icon: 'clipboardIcon',
               link: `/agency/${agency.id}/launchpad`,
             },
             {
-              name: 'Billing',
+              name: 'Биллинг',
               icon: 'payment',
               link: `/agency/${agency.id}/billing`,
             },
             {
-              name: 'Settings',
+              name: 'Настройки',
               icon: 'settings',
               link: `/agency/${agency.id}/settings`,
             },
             {
-              name: 'Sub Accounts',
+              name: 'Субаккаунты',
               icon: 'person',
               link: `/agency/${agency.id}/all-subaccounts`,
             },
             {
-              name: 'Team',
+              name: 'Команда',
               icon: 'shield',
               link: `/agency/${agency.id}/team`,
             },
@@ -334,47 +320,47 @@ export const upsertSubAccount = async (subAccount: SubAccount) => {
         },
       },
       Pipeline: {
-        create: { name: 'Lead Cycle' },
+        create: { name: 'Ведущий цикл' },
       },
       SidebarOption: {
         create: [
           {
-            name: 'Launchpad',
+            name: 'Главная',
             icon: 'clipboardIcon',
             link: `/subaccount/${subAccount.id}/launchpad`,
           },
           {
-            name: 'Settings',
+            name: 'Настройки',
             icon: 'settings',
             link: `/subaccount/${subAccount.id}/settings`,
           },
           {
-            name: 'Funnels',
+            name: 'Воронки',
             icon: 'pipelines',
             link: `/subaccount/${subAccount.id}/funnels`,
           },
           {
-            name: 'Media',
+            name: 'Медиа',
             icon: 'database',
             link: `/subaccount/${subAccount.id}/media`,
           },
           {
-            name: 'Automations',
+            name: 'Автоматизации',
             icon: 'chip',
             link: `/subaccount/${subAccount.id}/automations`,
           },
           {
-            name: 'Pipelines',
+            name: 'Пайплайны',
             icon: 'flag',
             link: `/subaccount/${subAccount.id}/pipelines`,
           },
           {
-            name: 'Contacts',
+            name: 'Контакты',
             icon: 'person',
             link: `/subaccount/${subAccount.id}/contacts`,
           },
           {
-            name: 'Dashboard',
+            name: 'Дашборд',
             icon: 'category',
             link: `/subaccount/${subAccount.id}`,
           },

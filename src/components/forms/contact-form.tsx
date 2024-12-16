@@ -1,25 +1,12 @@
-import { ContactUserFormSchema } from '@/lib/types'
-import { zodResolver } from '@hookform/resolvers/zod'
+import {ContactUserFormSchema} from '@/lib/types'
+import {zodResolver} from '@hookform/resolvers/zod'
 import React from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../ui/card'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../ui/form'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from '../ui/card'
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from '../ui/form'
+import {Input} from '../ui/input'
+import {Button} from '../ui/button'
 import Loading from '../global/loading'
 
 type Props = {
@@ -39,8 +26,8 @@ const ContactForm = ({ apiCall, subTitle, title }: Props) => {
   })
   const isLoading = form.formState.isLoading
 
-  //CHALLENGE: We want to create tags for each leads that comes from the form
-  
+  //CHALLENGE: Мы хотим создать теги для каждого лида, который приходит с формы
+
   return (
     <Card className="max-w-[500px] w-[500px]">
       <CardHeader>
@@ -59,10 +46,10 @@ const ContactForm = ({ apiCall, subTitle, title }: Props) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Имя</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Name"
+                      placeholder="Имя"
                       {...field}
                     />
                   </FormControl>
@@ -93,7 +80,7 @@ const ContactForm = ({ apiCall, subTitle, title }: Props) => {
               disabled={isLoading}
               type="submit"
             >
-              {form.formState.isSubmitting ? <Loading /> : 'Get a free quote!'}
+              {form.formState.isSubmitting ? <Loading /> : 'Получить бесплатную консультацию!'}
             </Button>
           </form>
         </Form>
@@ -103,3 +90,4 @@ const ContactForm = ({ apiCall, subTitle, title }: Props) => {
 }
 
 export default ContactForm
+

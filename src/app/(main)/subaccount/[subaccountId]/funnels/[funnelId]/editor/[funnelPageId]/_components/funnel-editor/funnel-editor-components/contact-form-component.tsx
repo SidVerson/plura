@@ -1,22 +1,18 @@
 'use client'
 import ContactForm from '@/components/forms/contact-form'
-import { Badge } from '@/components/ui/badge'
-import { toast } from '@/components/ui/use-toast'
-import { EditorBtns } from '@/lib/constants'
-import {
-  getFunnel,
-  saveActivityLogsNotification,
-  upsertContact,
-} from '@/lib/queries'
+import {Badge} from '@/components/ui/badge'
+import {toast} from '@/components/ui/use-toast'
+import {EditorBtns} from '@/lib/constants'
+import {getFunnel, saveActivityLogsNotification, upsertContact,} from '@/lib/queries'
 
-import { ContactUserFormSchema } from '@/lib/types'
-import { EditorElement, useEditor } from '@/providers/editor/editor-provider'
+import {ContactUserFormSchema} from '@/lib/types'
+import {EditorElement, useEditor} from '@/providers/editor/editor-provider'
 import clsx from 'clsx'
-import { Trash } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import {Trash} from 'lucide-react'
+import {useRouter} from 'next/navigation'
 
 import React from 'react'
-import { z } from 'zod'
+import {z} from 'zod'
 
 type Props = {
   element: EditorElement
@@ -119,8 +115,8 @@ const ContactFormComponent = (props: Props) => {
           </Badge>
         )}
       <ContactForm
-        subTitle="Contact Us"
-        title="Want a free quote? We can help you"
+        subTitle="Свяжитесь с нами"
+        title="Нужна помощь? Мы на связи!"
         apiCall={onFormSubmit}
       />
       {state.editor.selectedElement.id === props.element.id &&

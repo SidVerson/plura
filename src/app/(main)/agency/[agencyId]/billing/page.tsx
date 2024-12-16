@@ -1,17 +1,10 @@
 import React from 'react'
-import { stripe } from '@/lib/stripe'
-import { addOnProducts, pricingCards } from '@/lib/constants'
-import { db } from '@/lib/db'
-import { Separator } from '@/components/ui/separator'
+import {stripe} from '@/lib/stripe'
+import {addOnProducts, pricingCards} from '@/lib/constants'
+import {db} from '@/lib/db'
+import {Separator} from '@/components/ui/separator'
 import PricingCard from './_components/pricing-card'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from '@/components/ui/table'
 import clsx from 'clsx'
 import SubscriptionHelper from './_components/subscription-helper'
 
@@ -69,9 +62,9 @@ const page = async ({ params }: Props) => {
         customerId={agencySubscription?.customerId || ''}
         planExists={agencySubscription?.Subscription?.active === true}
       />
-      <h1 className="text-4xl p-4">Billing</h1>
+      <h1 className="text-4xl p-4">Билинг</h1>
       <Separator className=" mb-6" />
-      <h2 className="text-2xl p-4">Current Plan</h2>
+      <h2 className="text-2xl p-4">Текущий план</h2>
       <div className="flex flex-col lg:!flex-row justify-between gap-8">
         <PricingCard
           planExists={agencySubscription?.Subscription?.active === true}
@@ -84,16 +77,17 @@ const page = async ({ params }: Props) => {
           }
           buttonCta={
             agencySubscription?.Subscription?.active === true
-              ? 'Change Plan'
-              : 'Get Started'
+              ? 'Сменить план'
+              : 'Начать'
           }
-          highlightDescription="Want to modify your plan? You can do this here. If you have
-          further question contact support@plura-app.com"
-          highlightTitle="Plan Options"
+          highlightDescription="Хотите изменить свой план? Вы можете сделать это здесь. Если у вас
+          дополнительные вопросы, обращайтесь по адресу support@plura-app.com.
+"
+          highlightTitle="Варианты"
           description={
             agencySubscription?.Subscription?.active === true
-              ? currentPlanDetails?.description || 'Lets get started'
-              : 'Lets get started! Pick a plan that works best for you.'
+              ? currentPlanDetails?.description || 'Начнем!'
+              : 'Начнем! Выберите план, который подходит вам больше всего.\n'
           }
           duration="/ month"
           features={
@@ -106,8 +100,8 @@ const page = async ({ params }: Props) => {
           }
           title={
             agencySubscription?.Subscription?.active === true
-              ? currentPlanDetails?.title || 'Starter'
-              : 'Starter'
+              ? currentPlanDetails?.title || 'Начальный'
+              : 'Начальный'
           }
         />
         {addOns.data.map((addOn) => (
@@ -123,25 +117,29 @@ const page = async ({ params }: Props) => {
                   `$${addOn.default_price.unit_amount / 100}`
                 : '$0'
             }
-            buttonCta="Subscribe"
-            description="Dedicated support line & teams channel for support"
-            duration="/ month"
+            buttonCta="Подписаться"
+            description="Выделенная линия поддержки и командный канал поддержки
+"
+            duration="/ месяц"
             features={[]}
-            title={'24/7 priority support'}
-            highlightTitle="Get support now!"
-            highlightDescription="Get priority support and skip the long long with the click of a button."
+            title={'24/7 приоритетная поддержка'}
+            highlightTitle="Получите поддержку прямо сейчас!
+"
+            highlightDescription="Получите приоритетную поддержку и избавьтесь от долгого ожидания одним нажатием кнопки.
+"
           />
         ))}
       </div>
-      <h2 className="text-2xl p-4">Payment History</h2>
+      <h2 className="text-2xl p-4">История платежей
+      </h2>
       <Table className="bg-card border-[1px] border-border rounded-md">
         <TableHeader className="rounded-md">
           <TableRow>
-            <TableHead className="w-[200px]">Description</TableHead>
-            <TableHead className="w-[200px]">Invoice Id</TableHead>
-            <TableHead className="w-[300px]">Date</TableHead>
-            <TableHead className="w-[200px]">Paid</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead className="w-[200px]">Описание</TableHead>
+            <TableHead className="w-[200px]">Id счета</TableHead>
+            <TableHead className="w-[300px]">Дата</TableHead>
+            <TableHead className="w-[200px]">Уплачено</TableHead>
+            <TableHead className="text-right">Кол-во</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="font-medium truncate">

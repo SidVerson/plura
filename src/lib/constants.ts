@@ -27,38 +27,39 @@ import Tune from '@/components/icons/tune'
 import Video from '@/components/icons/video_recorder'
 import Wallet from '@/components/icons/wallet'
 import Warning from '@/components/icons/warning'
+
 export const pricingCards = [
   {
-    title: 'Starter',
-    description: 'Perfect for trying out plura',
-    price: 'Free',
+    title: 'Стартовый',
+    description: 'Идеально подходит для опробования plura',
+    price: 'Бесплатно',
     duration: '',
-    highlight: 'Key features',
-    features: ['3 Sub accounts', '2 Team members', 'Unlimited pipelines'],
+    highlight: 'Ключевые особенности',
+    features: ['3 доп аккаунту', '2 члена команды', 'Неограниченные пайплайны'],
     priceId: '',
   },
   {
-    title: 'Unlimited Saas',
-    description: 'The ultimate agency kit',
+    title: 'Безлимит',
+    description: 'Универсальный набор для агентства',
     price: '$199',
-    duration: 'month',
-    highlight: 'Key features',
-    features: ['Rebilling', '24/7 Support team'],
+    duration: 'месяц',
+    highlight: 'Ключевые особенности',
+    features: ['Ребиллинг', 'Круглосуточная служба поддержки'],
     priceId: 'price_1OYxkqFj9oKEERu1KfJGWxgN',
   },
   {
-    title: 'Basic',
-    description: 'For serious agency owners',
+    title: 'Базовый',
+    description: 'Для серьезных владельцев агентств',
     price: '$49',
-    duration: 'month',
-    highlight: 'Everything in Starter, plus',
-    features: ['Unlimited Sub accounts', 'Unlimited Team members'],
+    duration: 'месяц',
+    highlight: 'Все в стартере, плюс',
+    features: ['Безлимитные доп аккаунты', 'Безлимитные члены команды'],
     priceId: 'price_1OYxkqFj9oKEERu1NbKUxXxN',
   },
 ]
 
 export const addOnProducts = [
-  { title: 'Priority Support', id: 'prod_PNjJAE2EpP16pn' },
+  { title: 'Приоритетная поддержка', id: 'prod_RMtF1vptjTIleq' },
 ]
 
 export const icons = [

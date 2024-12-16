@@ -1,13 +1,8 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { db } from '@/lib/db'
-import {
-  getLanesWithTicketAndTags,
-  getPipelineDetails,
-  updateLanesOrder,
-  updateTicketsOrder,
-} from '@/lib/queries'
-import { LaneDetail } from '@/lib/types'
-import { redirect } from 'next/navigation'
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
+import {db} from '@/lib/db'
+import {getLanesWithTicketAndTags, getPipelineDetails, updateLanesOrder, updateTicketsOrder,} from '@/lib/queries'
+import {LaneDetail} from '@/lib/types'
+import {redirect} from 'next/navigation'
 import React from 'react'
 import PipelineInfoBar from '../_components/pipeline-infobar'
 import PipelineSettings from '../_components/pipeline-settings'
@@ -42,8 +37,8 @@ const PipelinePage = async ({ params }: Props) => {
           pipelines={pipelines}
         />
         <div>
-          <TabsTrigger value="view">Pipeline View</TabsTrigger>
-          <TabsTrigger value="settings">Settings</TabsTrigger>
+          <TabsTrigger value="view">Просмотр</TabsTrigger>
+          <TabsTrigger value="settings">Настройки</TabsTrigger>
         </div>
       </TabsList>
       <TabsContent value="view">

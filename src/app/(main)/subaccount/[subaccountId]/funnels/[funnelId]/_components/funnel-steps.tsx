@@ -1,32 +1,22 @@
 'use client'
 import CreateFunnelPage from '@/components/forms/funnel-page'
 import CustomModal from '@/components/global/custom-modal'
-import { AlertDialog } from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { toast } from '@/components/ui/use-toast'
-import { upsertFunnelPage } from '@/lib/queries'
-import { FunnelsForSubAccount } from '@/lib/types'
-import { useModal } from '@/providers/modal-provider'
-import { FunnelPage } from '@prisma/client'
-import { Check, ExternalLink, LucideEdit } from 'lucide-react'
-import React, { useState } from 'react'
+import {AlertDialog} from '@/components/ui/alert-dialog'
+import {Button} from '@/components/ui/button'
+import {ScrollArea} from '@/components/ui/scroll-area'
+import {toast} from '@/components/ui/use-toast'
+import {upsertFunnelPage} from '@/lib/queries'
+import {FunnelsForSubAccount} from '@/lib/types'
+import {useModal} from '@/providers/modal-provider'
+import {FunnelPage} from '@prisma/client'
+import {Check, ExternalLink, LucideEdit} from 'lucide-react'
+import React, {useState} from 'react'
 
-import {
-  DragDropContext,
-  DragStart,
-  DropResult,
-  Droppable,
-} from 'react-beautiful-dnd'
+import {DragDropContext, DragStart, Droppable, DropResult,} from 'react-beautiful-dnd'
 import Link from 'next/link'
 import FunnelPagePlaceholder from '@/components/icons/funnel-page-placeholder'
 
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import {Card, CardDescription, CardHeader, CardTitle,} from '@/components/ui/card'
 import FunnelStepCard from './funnel-step-card'
 
 type Props = {
@@ -91,8 +81,8 @@ const FunnelSteps = ({ funnel, funnelId, pages, subaccountId }: Props) => {
     })
 
     toast({
-      title: 'Success',
-      description: 'Saved page order',
+      title: 'Успех',
+      description: 'Сохранено',
     })
   }
 
@@ -103,7 +93,7 @@ const FunnelSteps = ({ funnel, funnelId, pages, subaccountId }: Props) => {
           <ScrollArea className="h-full ">
             <div className="flex gap-4 items-center">
               <Check />
-              Funnel Steps
+              Шаги
             </div>
             {pagesState.length ? (
               <DragDropContext
@@ -140,7 +130,7 @@ const FunnelSteps = ({ funnel, funnelId, pages, subaccountId }: Props) => {
               </DragDropContext>
             ) : (
               <div className="text-center text-muted-foreground py-6">
-                No Pages
+                Нет страниц
               </div>
             )}
           </ScrollArea>
@@ -161,14 +151,14 @@ const FunnelSteps = ({ funnel, funnelId, pages, subaccountId }: Props) => {
               )
             }}
           >
-            Create New Steps
+            Создать новый шаги
           </Button>
         </aside>
         <aside className="flex-[0.7] bg-muted p-4 ">
           {!!pages.length ? (
             <Card className="h-full flex justify-between flex-col">
               <CardHeader>
-                <p className="text-sm text-muted-foreground">Page name</p>
+                <p className="text-sm text-muted-foreground">Название страницы</p>
                 <CardTitle>{clickedPage?.name}</CardTitle>
                 <CardDescription className="flex flex-col gap-4">
                   <div className="border-2 rounded-lg sm:w-80 w-full  overflow-clip">
@@ -210,7 +200,7 @@ const FunnelSteps = ({ funnel, funnelId, pages, subaccountId }: Props) => {
             </Card>
           ) : (
             <div className="h-[600px] flex items-center justify-center text-muted-foreground">
-              Create a page to view page settings.
+              Создайте страницу, чтобы просмотреть ее настройки.
             </div>
           )}
         </aside>

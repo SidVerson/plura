@@ -1,37 +1,24 @@
 'use client'
 import React from 'react'
-import { z } from 'zod'
-import { useToast } from '../ui/use-toast'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../ui/card'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../ui/form'
-import { createMedia, saveActivityLogsNotification } from '@/lib/queries'
-import { Input } from '../ui/input'
+import {z} from 'zod'
+import {useToast} from '../ui/use-toast'
+import {useRouter} from 'next/navigation'
+import {useForm} from 'react-hook-form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from '../ui/card'
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from '../ui/form'
+import {createMedia, saveActivityLogsNotification} from '@/lib/queries'
+import {Input} from '../ui/input'
 import FileUpload from '../global/file-upload'
-import { Button } from '../ui/button'
+import {Button} from '../ui/button'
 
 type Props = {
   subaccountId: string
 }
 
 const formSchema = z.object({
-  link: z.string().min(1, { message: 'Media File is required' }),
-  name: z.string().min(1, { message: 'Name is required' }),
+  link: z.string().min(1, { message: 'Файл необходим' }),
+  name: z.string().min(1, { message: 'Имя необходимо' }),
 })
 
 const UploadMediaForm = ({ subaccountId }: Props) => {
@@ -51,18 +38,18 @@ const UploadMediaForm = ({ subaccountId }: Props) => {
       const response = await createMedia(subaccountId, values)
       await saveActivityLogsNotification({
         agencyId: undefined,
-        description: `Uploaded a media file | ${response.name}`,
+        description: `Файл загружен | ${response.name}`,
         subaccountId,
       })
 
-      toast({ title: 'Succes', description: 'Uploaded media' })
+      toast({ title: 'Успех', description: 'загружено' })
       router.refresh()
     } catch (error) {
       console.log(error)
       toast({
         variant: 'destructive',
-        title: 'Failed',
-        description: 'Could not uploaded media',
+        title: 'Ошибка',
+        description: 'не получилось загрузить файл',
       })
     }
   }
@@ -70,9 +57,9 @@ const UploadMediaForm = ({ subaccountId }: Props) => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Media Information</CardTitle>
+        <CardTitle>Информация файла</CardTitle>
         <CardDescription>
-          Please enter the details for your file
+          Пожалуйста, введите данные для вашего файла
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -83,10 +70,10 @@ const UploadMediaForm = ({ subaccountId }: Props) => {
               name="name"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>File Name</FormLabel>
+                  <FormLabel>Название</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Your agency name"
+                      placeholder="Название"
                       {...field}
                     />
                   </FormControl>
@@ -100,7 +87,7 @@ const UploadMediaForm = ({ subaccountId }: Props) => {
               name="link"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Media File</FormLabel>
+                  <FormLabel>Файл</FormLabel>
                   <FormControl>
                     <FileUpload
                       apiEndpoint="subaccountLogo"
@@ -116,7 +103,7 @@ const UploadMediaForm = ({ subaccountId }: Props) => {
               type="submit"
               className="mt-4"
             >
-              Upload Media
+              Загрузить
             </Button>
           </form>
         </Form>

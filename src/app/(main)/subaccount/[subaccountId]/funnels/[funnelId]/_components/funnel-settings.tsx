@@ -1,18 +1,12 @@
 import React from 'react'
 
-import { Funnel, SubAccount } from '@prisma/client'
-import { db } from '@/lib/db'
-import { getConnectAccountProducts } from '@/lib/stripe/stripe-actions'
+import {Funnel} from '@prisma/client'
+import {db} from '@/lib/db'
+import {getConnectAccountProducts} from '@/lib/stripe/stripe-actions'
 
 
 import FunnelForm from '@/components/forms/funnel-form'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from '@/components/ui/card'
 import FunnelProductsTable from './funnel-products-table'
 
 interface FunnelSettingsProps {
@@ -42,10 +36,10 @@ const FunnelSettings: React.FC<FunnelSettingsProps> = async ({
     <div className="flex gap-4 flex-col xl:!flex-row">
       <Card className="flex-1 flex-shrink">
         <CardHeader>
-          <CardTitle>Funnel Products</CardTitle>
+          <CardTitle>Воронки</CardTitle>
           <CardDescription>
-            Select the products and services you wish to sell on this funnel.
-            You can sell one time and recurring products too.
+            Выберите продукты и услуги, которые вы хотите продавать в этой воронке.
+            Вы можете продавать как одноразовые, так и повторяющиеся продукты.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -56,7 +50,7 @@ const FunnelSettings: React.FC<FunnelSettingsProps> = async ({
                 products={products}
               />
             ) : (
-              'Connect your stripe account to sell products.'
+              'Подключите свой аккаунт stripe, чтобы продавать товары.'
             )}
           </>
         </CardContent>

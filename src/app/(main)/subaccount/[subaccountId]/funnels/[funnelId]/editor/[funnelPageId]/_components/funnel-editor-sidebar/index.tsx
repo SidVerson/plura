@@ -1,15 +1,7 @@
 'use client'
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-} from '@/components/ui/sheet'
-import { Tabs, TabsContent } from '@/components/ui/tabs'
-import { useEditor } from '@/providers/editor/editor-provider'
+import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle,} from '@/components/ui/sheet'
+import {Tabs, TabsContent} from '@/components/ui/tabs'
+import {useEditor} from '@/providers/editor/editor-provider'
 import clsx from 'clsx'
 import React from 'react'
 import TabList from './tabs'
@@ -54,10 +46,10 @@ const FunnelEditorSidebar = ({ subaccountId }: Props) => {
           <div className="grid gap-4 h-full pb-36 overflow-scroll">
             <TabsContent value="Settings">
               <SheetHeader className="text-left p-6">
-                <SheetTitle>Styles</SheetTitle>
+                <SheetTitle>Стили</SheetTitle>
                 <SheetDescription>
-                  Show your creativity! You can customize every component as you
-                  like.
+                  Проявите свою креативность! Вы можете настроить каждый компонент по своему
+                  как вам нравится.
                 </SheetDescription>
               </SheetHeader>
               <SettingsTab />
@@ -67,10 +59,9 @@ const FunnelEditorSidebar = ({ subaccountId }: Props) => {
             </TabsContent>
             <TabsContent value="Components">
               <SheetHeader className="text-left p-6 ">
-                <SheetTitle>Components</SheetTitle>
+                <SheetTitle>Компоненты</SheetTitle>
                 <SheetDescription>
-                  You can drag and drop components on the canvas
-                </SheetDescription>
+                  Вы можете перетаскивать компоненты на страницу              </SheetDescription>
               </SheetHeader>
               <ComponentsTab />
             </TabsContent>

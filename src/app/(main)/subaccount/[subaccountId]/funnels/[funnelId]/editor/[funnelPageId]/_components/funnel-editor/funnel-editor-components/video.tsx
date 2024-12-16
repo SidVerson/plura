@@ -1,9 +1,9 @@
 'use client'
-import { Badge } from '@/components/ui/badge'
-import { EditorBtns } from '@/lib/constants'
-import { EditorElement, useEditor } from '@/providers/editor/editor-provider'
+import {Badge} from '@/components/ui/badge'
+import {EditorBtns} from '@/lib/constants'
+import {EditorElement, useEditor} from '@/providers/editor/editor-provider'
 import clsx from 'clsx'
-import { Trash } from 'lucide-react'
+import {Trash} from 'lucide-react'
 import React from 'react'
 
 type Props = {
@@ -64,7 +64,7 @@ const VideoComponent = (props: Props) => {
           width={props.element.styles.width || '560'}
           height={props.element.styles.height || '315'}
           src={props.element.content.src}
-          title="YouTube video player"
+          title="Видео плеер"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         />
       )}

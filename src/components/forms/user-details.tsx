@@ -1,13 +1,10 @@
 'use client'
-import {
-  AuthUserWithAgencySigebarOptionsSubAccounts,
-  UserWithPermissionsAndSubAccounts,
-} from '@/lib/types'
-import { useModal } from '@/providers/modal-provider'
-import { SubAccount, User } from '@prisma/client'
-import React, { useEffect, useState } from 'react'
-import { useToast } from '../ui/use-toast'
-import { useRouter } from 'next/navigation'
+import {AuthUserWithAgencySigebarOptionsSubAccounts, UserWithPermissionsAndSubAccounts,} from '@/lib/types'
+import {useModal} from '@/providers/modal-provider'
+import {SubAccount, User} from '@prisma/client'
+import React, {useEffect, useState} from 'react'
+import {useToast} from '../ui/use-toast'
+import {useRouter} from 'next/navigation'
 import {
   changeUserPermissions,
   getAuthUserDetails,
@@ -15,40 +12,20 @@ import {
   saveActivityLogsNotification,
   updateUser,
 } from '@/lib/queries'
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../ui/card'
+import {z} from 'zod'
+import {useForm} from 'react-hook-form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from '../ui/card'
 
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from '@/components/ui/form'
 import FileUpload from '../global/file-upload'
-import { Input } from '../ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select'
-import { Button } from '../ui/button'
+import {Input} from '../ui/input'
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from '../ui/select'
+import {Button} from '../ui/button'
 import Loading from '../global/loading'
-import { Separator } from '../ui/separator'
-import { Switch } from '../ui/switch'
-import { v4 } from 'uuid'
+import {Separator} from '../ui/separator'
+import {Switch} from '../ui/switch'
+import {v4} from 'uuid'
 
 type Props = {
   id: string | null
@@ -139,7 +116,7 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
     if (type === 'agency') {
       await saveActivityLogsNotification({
         agencyId: authUserData?.Agency?.id,
-        description: `Gave ${userData?.name} access to | ${
+        description: `${userData?.name} дан доступ к | ${
           subAccountPermissions?.Permissions.find(
             (p) => p.subAccountId === subAccountId
           )?.SubAccount.name
@@ -152,8 +129,8 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
 
     if (response) {
       toast({
-        title: 'Success',
-        description: 'The request was successfull',
+        title: 'Успешно',
+
       })
       if (subAccountPermissions) {
         subAccountPermissions.Permissions.find((perm) => {
@@ -166,8 +143,8 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
     } else {
       toast({
         variant: 'destructive',
-        title: 'Failed',
-        description: 'Could not update permissions',
+        title: 'Ошибка',
+
       })
     }
     router.refresh()
@@ -185,23 +162,23 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
       ).forEach(async (subaccount) => {
         await saveActivityLogsNotification({
           agencyId: undefined,
-          description: `Updated ${userData?.name} information`,
+          description: `Информация ${userData?.name} обновлена`,
           subaccountId: subaccount.id,
         })
       })
 
       if (updatedUser) {
         toast({
-          title: 'Success',
-          description: 'Update User Information',
+          title: 'Успех',
+          description: 'Информация обновлена',
         })
         setClose()
         router.refresh()
       } else {
         toast({
           variant: 'destructive',
-          title: 'Oppse!',
-          description: 'Could not update user information',
+          title: 'Упс!',
+          description: 'Не получилось обновить пользовательскую информацию',
         })
       }
     } else {
@@ -212,8 +189,8 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>User Details</CardTitle>
-        <CardDescription>Add or update your information</CardDescription>
+        <CardTitle>Данные пользователя</CardTitle>
+        <CardDescription>Добавьте или обновите свою информацию</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -227,7 +204,7 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
               name="avatarUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Profile picture</FormLabel>
+                  <FormLabel>Аватар</FormLabel>
                   <FormControl>
                     <FileUpload
                       apiEndpoint="avatar"
@@ -246,11 +223,11 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
               name="name"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>User full name</FormLabel>
+                  <FormLabel>Имя</FormLabel>
                   <FormControl>
                     <Input
                       required
-                      placeholder="Full Name"
+                      placeholder="имя"
                       {...field}
                     />
                   </FormControl>
@@ -285,7 +262,7 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
               name="role"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel> User Role</FormLabel>
+                  <FormLabel>Роль</FormLabel>
                   <Select
                     disabled={field.value === 'AGENCY_OWNER'}
                     onValueChange={(value) => {
@@ -294,7 +271,7 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
                         value === 'SUBACCOUNT_GUEST'
                       ) {
                         setRoleState(
-                          'You need to have subaccounts to assign Subaccount access to team members.'
+                          'Чтобы назначить доступ к субаккаунту членам команды, необходимо иметь субаккаунты.'
                         )
                       } else {
                         setRoleState('')
@@ -305,24 +282,24 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select user role..." />
+                        <SelectValue placeholder="Выберите роль пользователя..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="AGENCY_ADMING">
-                        Agency Admin
+                        Администратор
                       </SelectItem>
                       {(data?.user?.role === 'AGENCY_OWNER' ||
                         userData?.role === 'AGENCY_OWNER') && (
                         <SelectItem value="AGENCY_OWNER">
-                          Agency Owner
+                          Владелец
                         </SelectItem>
                       )}
                       <SelectItem value="SUBACCOUNT_USER">
-                        Sub Account User
+                        Субаккаунт
                       </SelectItem>
                       <SelectItem value="SUBACCOUNT_GUEST">
-                        Sub Account Guest
+                        Гость
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -335,16 +312,16 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
               disabled={form.formState.isSubmitting}
               type="submit"
             >
-              {form.formState.isSubmitting ? <Loading /> : 'Save User Details'}
+              {form.formState.isSubmitting ? <Loading /> : 'Сохранить'}
             </Button>
             {authUserData?.role === 'AGENCY_OWNER' && (
               <div>
                 <Separator className="my-4" />
-                <FormLabel> User Permissions</FormLabel>
+                <FormLabel> Доступы</FormLabel>
                 <FormDescription className="mb-4">
-                  You can give Sub Account access to team member by turning on
-                  access control for each Sub Account. This is only visible to
-                  agency owners
+                  Вы можете предоставить доступ к субаккаунту члену команды, включив
+                  контроль доступа для каждой субаккаунта. Это видно только для
+                  владельцы агентств
                 </FormDescription>
                 <div className="flex flex-col gap-4">
                   {subAccounts?.map((subAccount) => {

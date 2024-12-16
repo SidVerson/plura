@@ -1,39 +1,21 @@
 'use client'
-import React, { useEffect } from 'react'
-import { z } from 'zod'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../ui/card'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../ui/form'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Input } from '../ui/input'
+import React, {useEffect} from 'react'
+import {z} from 'zod'
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from '../ui/card'
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from '../ui/form'
+import {useForm} from 'react-hook-form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Input} from '../ui/input'
 
-import { Button } from '../ui/button'
+import {Button} from '../ui/button'
 import Loading from '../global/loading'
-import { useToast } from '../ui/use-toast'
-import { FunnelPage } from '@prisma/client'
-import { FunnelPageSchema } from '@/lib/types'
-import {
-  deleteFunnelePage,
-  getFunnels,
-  saveActivityLogsNotification,
-  upsertFunnelPage,
-} from '@/lib/queries'
-import { useRouter } from 'next/navigation'
-import { v4 } from 'uuid'
-import { CopyPlusIcon, Trash } from 'lucide-react'
+import {useToast} from '../ui/use-toast'
+import {FunnelPage} from '@prisma/client'
+import {FunnelPageSchema} from '@/lib/types'
+import {deleteFunnelePage, getFunnels, saveActivityLogsNotification, upsertFunnelPage,} from '@/lib/queries'
+import {useRouter} from 'next/navigation'
+import {v4} from 'uuid'
+import {CopyPlusIcon, Trash} from 'lucide-react'
 
 interface CreateFunnelPageProps {
   defaultData?: FunnelPage
@@ -50,7 +32,6 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
 }) => {
   const { toast } = useToast()
   const router = useRouter()
-  //ch
   const form = useForm<z.infer<typeof FunnelPageSchema>>({
     resolver: zodResolver(FunnelPageSchema),
     mode: 'onChange',
@@ -70,7 +51,7 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
     if (order !== 0 && !values.pathName)
       return form.setError('pathName', {
         message:
-          "Pages other than the first page in the funnel require a path name example 'secondstep'.",
+          "Страницы, кроме первой в воронке, требуют указания имени пути, например 'secondstep'.",
       })
     try {
       const response = await upsertFunnelPage(
@@ -86,21 +67,21 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
 
       await saveActivityLogsNotification({
         agencyId: undefined,
-        description: `Updated a funnel page | ${response?.name}`,
+        description: `Обновлена страница воронки | ${response?.name}`,
         subaccountId: subaccountId,
       })
 
       toast({
-        title: 'Success',
-        description: 'Saves Funnel Page Details',
+        title: 'Успешно',
+        description: 'Данные страницы воронки сохранены',
       })
       router.refresh()
     } catch (error) {
       console.log(error)
       toast({
         variant: 'destructive',
-        title: 'Oppse!',
-        description: 'Could Save Funnel Page Details',
+        title: 'Ошибка!',
+        description: 'Не удалось сохранить данные страницы воронки',
       })
     }
   }
@@ -108,10 +89,9 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Funnel Page</CardTitle>
+        <CardTitle>Страница воронки</CardTitle>
         <CardDescription>
-          Funnel pages are flow in the order they are created by default. You
-          can move them around to change their order.
+          Страницы воронки по умолчанию идут в порядке их создания. Вы можете изменить их порядок.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -126,10 +106,10 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
               name="name"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Имя</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Name"
+                      placeholder="Имя"
                       {...field}
                     />
                   </FormControl>
@@ -143,10 +123,10 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
               name="pathName"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>Path Name</FormLabel>
+                  <FormLabel>Имя пути</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Path for the page"
+                      placeholder="Путь для страницы"
                       {...field}
                       value={field.value?.toLowerCase()}
                     />
@@ -161,7 +141,7 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
                 disabled={form.formState.isSubmitting}
                 type="submit"
               >
-                {form.formState.isSubmitting ? <Loading /> : 'Save Page'}
+                {form.formState.isSubmitting ? <Loading /> : 'Сохранить страницу'}
               </Button>
 
               {defaultData?.id && (
@@ -174,7 +154,7 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
                     const response = await deleteFunnelePage(defaultData.id)
                     await saveActivityLogsNotification({
                       agencyId: undefined,
-                      description: `Deleted a funnel page | ${response?.name}`,
+                      description: `Удалена страница воронки | ${response?.name}`,
                       subaccountId: subaccountId,
                     })
                     router.refresh()
@@ -202,15 +182,15 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
                         id: v4(),
                         order: lastFunnelPage ? lastFunnelPage : 0,
                         visits: 0,
-                        name: `${defaultData.name} Copy`,
+                        name: `${defaultData.name} Копия`,
                         pathName: `${defaultData.pathName}copy`,
                         content: defaultData.content,
                       },
                       funnelId
                     )
                     toast({
-                      title: 'Success',
-                      description: 'Saves Funnel Page Details',
+                      title: 'Успешно',
+                      description: 'Данные страницы воронки сохранены',
                     })
                     router.refresh()
                   }}
@@ -227,3 +207,4 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
 }
 
 export default CreateFunnelPage
+

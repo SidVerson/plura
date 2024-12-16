@@ -1,31 +1,18 @@
 'use client'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Switch } from '@/components/ui/switch'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { saveActivityLogsNotification, upsertFunnelPage } from '@/lib/queries'
-import { DeviceTypes, useEditor } from '@/providers/editor/editor-provider'
-import { FunnelPage } from '@prisma/client'
+import {Button} from '@/components/ui/button'
+import {Input} from '@/components/ui/input'
+import {Switch} from '@/components/ui/switch'
+import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from '@/components/ui/tooltip'
+import {saveActivityLogsNotification, upsertFunnelPage} from '@/lib/queries'
+import {DeviceTypes, useEditor} from '@/providers/editor/editor-provider'
+import {FunnelPage} from '@prisma/client'
 import clsx from 'clsx'
-import {
-  ArrowLeftCircle,
-  EyeIcon,
-  Laptop,
-  Redo2,
-  Smartphone,
-  Tablet,
-  Undo2,
-} from 'lucide-react'
+import {ArrowLeftCircle, EyeIcon, Laptop, Redo2, Smartphone, Tablet, Undo2,} from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import React, { FocusEventHandler, useEffect } from 'react'
-import { toast } from 'sonner'
+import {useRouter} from 'next/navigation'
+import React, {FocusEventHandler, useEffect} from 'react'
+import {toast} from 'sonner'
 
 type Props = {
   funnelId: string
@@ -101,16 +88,12 @@ const FunnelEditorNavigation = ({
       )
       await saveActivityLogsNotification({
         agencyId: undefined,
-        description: `Updated a funnel page | ${response?.name}`,
+        description: `Обновлена страница воронки | ${response?.name}`,
         subaccountId: subaccountId,
       })
-      toast('Success', {
-        description: 'Saved Editor',
-      })
+      toast('Успешно', { description: 'Редактор сохранён' })
     } catch (error) {
-      toast('Oppse!', {
-        description: 'Could not save editor',
-      })
+      toast('Ошибка!', { description: 'Не удалось сохранить редактор' })
     }
   }
 
@@ -133,7 +116,7 @@ const FunnelEditorNavigation = ({
               onBlur={handleOnBlurTitleChange}
             />
             <span className="text-sm text-muted-foreground">
-              Path: /{funnelPageDetails.pathName}
+              Путь: /{funnelPageDetails.pathName}
             </span>
           </div>
         </aside>
@@ -160,7 +143,7 @@ const FunnelEditorNavigation = ({
                   </TabsTrigger>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Desktop</p>
+                  <p>Компьютер</p>
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
@@ -173,7 +156,7 @@ const FunnelEditorNavigation = ({
                   </TabsTrigger>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Tablet</p>
+                  <p>Планшет</p>
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
@@ -186,7 +169,7 @@ const FunnelEditorNavigation = ({
                   </TabsTrigger>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Mobile</p>
+                  <p>Телефон</p>
                 </TooltipContent>
               </Tooltip>
             </TabsList>
@@ -223,18 +206,18 @@ const FunnelEditorNavigation = ({
           </Button>
           <div className="flex flex-col item-center mr-4">
             <div className="flex flex-row items-center gap-4">
-              Draft
+              В черновик
               <Switch
                 disabled
                 defaultChecked={true}
               />
-              Publish
+              Опубликовать
             </div>
             <span className="text-muted-foreground text-sm">
-              Last updated {funnelPageDetails.updatedAt.toLocaleDateString()}
+              Последнее обновление: {funnelPageDetails.updatedAt.toLocaleDateString()}
             </span>
           </div>
-          <Button onClick={handleOnSave}>Save</Button>
+          <Button onClick={handleOnSave}>Сохранить</Button>
         </aside>
       </nav>
     </TooltipProvider>

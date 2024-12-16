@@ -1,18 +1,11 @@
 'use client'
 import SubscriptionFormWrapper from '@/components/forms/subscription-form/subscription-form-wrapper'
 import CustomModal from '@/components/global/custom-modal'
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { PricesList } from '@/lib/types'
-import { useModal } from '@/providers/modal-provider'
-import { useSearchParams } from 'next/navigation'
+import {Button} from '@/components/ui/button'
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from '@/components/ui/card'
+import {PricesList} from '@/lib/types'
+import {useModal} from '@/providers/modal-provider'
+import {useSearchParams} from 'next/navigation'
 import React from 'react'
 
 type Props = {
@@ -49,8 +42,9 @@ const PricingCard = ({
   const handleManagePlan = async () => {
     setOpen(
       <CustomModal
-        title={'Manage Your Plan'}
-        subheading="You can change your plan at any time from the billings settings"
+        title={'Управляйте своим планом\n'}
+        subheading="Вы можете в любой момент изменить свой план в настройках выставления счетов
+"
       >
         <SubscriptionFormWrapper
           customerId={customerId}

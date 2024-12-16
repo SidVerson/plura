@@ -1,12 +1,12 @@
 'use client'
 import SubAccountDetails from '@/components/forms/subaccount-details'
 import CustomModal from '@/components/global/custom-modal'
-import { Button } from '@/components/ui/button'
-import { useModal } from '@/providers/modal-provider'
-import { Agency, AgencySidebarOption, SubAccount, User } from '@prisma/client'
-import { PlusCircleIcon } from 'lucide-react'
+import {Button} from '@/components/ui/button'
+import {useModal} from '@/providers/modal-provider'
+import {Agency, AgencySidebarOption, SubAccount, User} from '@prisma/client'
+import {PlusCircleIcon} from 'lucide-react'
 import React from 'react'
-import { twMerge } from 'tailwind-merge'
+import {twMerge} from 'tailwind-merge'
 
 type Props = {
   user: User & {
@@ -36,8 +36,8 @@ const CreateSubaccountButton = ({ className, id, user }: Props) => {
       onClick={() => {
         setOpen(
           <CustomModal
-            title="Create a Subaccount"
-            subheading="You can switch bettween"
+            title="Создать субаккаунт"
+            subheading="Вы сможете менять их"
           >
             <SubAccountDetails
               agencyDetails={agencyDetails}
@@ -49,7 +49,7 @@ const CreateSubaccountButton = ({ className, id, user }: Props) => {
       }}
     >
       <PlusCircleIcon size={15} />
-      Create Sub Account
+      Создать
     </Button>
   )
 }

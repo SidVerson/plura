@@ -1,12 +1,12 @@
 'use client'
-import { EditorElement, useEditor } from '@/providers/editor/editor-provider'
+import {EditorElement, useEditor} from '@/providers/editor/editor-provider'
 import React from 'react'
 import RecursiveElement from './recursive'
 
-import { v4 } from 'uuid'
+import {v4} from 'uuid'
 import clsx from 'clsx'
-import { Badge } from '@/components/ui/badge'
-import { EditorBtns, defaultStyles } from '@/lib/constants'
+import {Badge} from '@/components/ui/badge'
+import {defaultStyles, EditorBtns} from '@/lib/constants'
 
 type Props = {
   element: EditorElement
@@ -26,9 +26,9 @@ const TwoColumns = (props: Props) => {
           payload: {
             containerId: id,
             elementDetails: {
-              content: { innerText: 'Text Component' },
+              content: { innerText: 'Текстовый компонент' },
               id: v4(),
-              name: 'Text',
+              name: 'Текст',
               styles: {
                 color: 'black',
                 ...defaultStyles,
@@ -46,7 +46,7 @@ const TwoColumns = (props: Props) => {
             elementDetails: {
               content: [],
               id: v4(),
-              name: 'Container',
+              name: 'Контейнер',
               styles: { ...defaultStyles },
               type: 'container',
             },
@@ -61,7 +61,7 @@ const TwoColumns = (props: Props) => {
             elementDetails: {
               content: [],
               id: v4(),
-              name: 'Two Columns',
+              name: 'Две колонки',
               styles: { ...defaultStyles },
               type: '2Col',
             },

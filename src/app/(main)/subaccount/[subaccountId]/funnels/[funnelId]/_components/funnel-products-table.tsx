@@ -1,23 +1,13 @@
 'use client'
-import React, { useState } from 'react'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
+import React, {useState} from 'react'
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from '@/components/ui/table'
 import Stripe from 'stripe'
 import Image from 'next/image'
-import {
-  saveActivityLogsNotification,
-  updateFunnelProducts,
-} from '@/lib/queries'
-import { Funnel } from '@prisma/client'
-import { useRouter } from 'next/navigation'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import {saveActivityLogsNotification, updateFunnelProducts,} from '@/lib/queries'
+import {Funnel} from '@prisma/client'
+import {useRouter} from 'next/navigation'
+import {Input} from '@/components/ui/input'
+import {Button} from '@/components/ui/button'
 
 interface FunnelProductsTableProps {
   defaultData: Funnel
@@ -79,11 +69,11 @@ const FunnelProductsTable: React.FC<FunnelProductsTableProps> = ({
       <Table className="bg-card border-[1px] border-border rounded-md">
         <TableHeader className="rounded-md">
           <TableRow>
-            <TableHead>Live</TableHead>
-            <TableHead>Image</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Interval</TableHead>
-            <TableHead className="text-right">Price</TableHead>
+            <TableHead>Статус</TableHead>
+            <TableHead>Изображение</TableHead>
+            <TableHead>Название</TableHead>
+            <TableHead>Интервал</TableHead>
+            <TableHead className="text-right">Цена</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="font-medium truncate">
@@ -114,7 +104,7 @@ const FunnelProductsTable: React.FC<FunnelProductsTableProps> = ({
               <TableCell>
                 {
                   //@ts-ignore
-                  product.default_price?.recurring ? 'Recurring' : 'One Time'
+                  product.default_price?.recurring ? 'Подписка' : 'Разовый платеж'
                 }
               </TableCell>
               <TableCell className="text-right">
@@ -133,7 +123,7 @@ const FunnelProductsTable: React.FC<FunnelProductsTableProps> = ({
         onClick={handleSaveProducts}
         className="mt-4"
       >
-        Save Products
+        Сохранить продукты
       </Button>
     </>
   )

@@ -1,32 +1,18 @@
 'use client'
-import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
+import {zodResolver} from '@hookform/resolvers/zod'
+import React, {useEffect} from 'react'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from '@/components/ui/form'
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from '@/components/ui/card'
+import {Input} from '../ui/input'
+import {Button} from '../ui/button'
 import Loading from '../global/loading'
-import { ContactUserFormSchema } from '@/lib/types'
-import { saveActivityLogsNotification, upsertContact } from '@/lib/queries'
-import { toast } from '../ui/use-toast'
-import { useRouter } from 'next/navigation'
-import { useModal } from '@/providers/modal-provider'
+import {ContactUserFormSchema} from '@/lib/types'
+import {saveActivityLogsNotification, upsertContact} from '@/lib/queries'
+import {toast} from '../ui/use-toast'
+import {useRouter} from 'next/navigation'
+import {useModal} from '@/providers/modal-provider'
 
 interface ContactUserFormProps {
   subaccountId: string
@@ -53,7 +39,7 @@ const ContactUserForm: React.FC<ContactUserFormProps> = ({ subaccountId }) => {
   const isLoading = form.formState.isLoading
 
   const handleSubmit = async (
-    values: z.infer<typeof ContactUserFormSchema>
+      values: z.infer<typeof ContactUserFormSchema>
   ) => {
     try {
       const response = await upsertContact({
@@ -63,90 +49,89 @@ const ContactUserForm: React.FC<ContactUserFormProps> = ({ subaccountId }) => {
       })
       await saveActivityLogsNotification({
         agencyId: undefined,
-        description: `Updated a contact | ${response?.name}`,
+        description: `Обновлен контакт | ${response?.name}`,
         subaccountId: subaccountId,
       })
       toast({
-        title: 'Success',
-        description: 'Saved funnel details',
+        title: 'Успешно',
+        description: 'Данные контакта сохранены',
       })
       setClose()
       router.refresh()
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: 'Oppse!',
-        description: 'Could not save funnel details',
+        title: 'Ошибка!',
+        description: 'Не удалось сохранить данные контакта',
       })
     }
   }
 
   return (
-    <Card className=" w-full">
-      <CardHeader>
-        <CardTitle>Contact Info</CardTitle>
-        <CardDescription>
-          You can assign tickets to contacts and set a value for each contact in
-          the ticket.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleSubmit)}
-            className="flex flex-col gap-4"
-          >
-            <FormField
-              disabled={isLoading}
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Name"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              disabled={isLoading}
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="Email"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button
-              className="mt-4"
-              disabled={isLoading}
-              type="submit"
+      <Card className=" w-full">
+        <CardHeader>
+          <CardTitle>Информация о контакте</CardTitle>
+          <CardDescription>
+            Вы можете назначать тикеты контактам и задавать значение для каждого контакта в тикете.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form
+                onSubmit={form.handleSubmit(handleSubmit)}
+                className="flex flex-col gap-4"
             >
-              {form.formState.isSubmitting ? (
-                <Loading />
-              ) : (
-                'Save Contact Details!'
-              )}
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+              <FormField
+                  disabled={isLoading}
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Имя</FormLabel>
+                        <FormControl>
+                          <Input
+                              placeholder="Имя"
+                              {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                  )}
+              />
+              <FormField
+                  disabled={isLoading}
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                              type="email"
+                              placeholder="Email"
+                              {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                  )}
+              />
+
+              <Button
+                  className="mt-4"
+                  disabled={isLoading}
+                  type="submit"
+              >
+                {form.formState.isSubmitting ? (
+                    <Loading />
+                ) : (
+                    'Сохранить контакт!'
+                )}
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
   )
 }
 

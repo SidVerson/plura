@@ -1,34 +1,21 @@
 'use client'
 
-import {
-  Agency,
-  AgencySidebarOption,
-  SubAccount,
-  SubAccountSidebarOption,
-} from '@prisma/client'
-import React, { useEffect, useMemo, useState } from 'react'
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from '../ui/sheet'
-import { Button } from '../ui/button'
-import { ChevronsUpDown, Compass, Menu, PlusCircleIcon } from 'lucide-react'
+import {Agency, AgencySidebarOption, SubAccount, SubAccountSidebarOption,} from '@prisma/client'
+import React, {useEffect, useMemo, useState} from 'react'
+import {Sheet, SheetClose, SheetContent, SheetTrigger} from '../ui/sheet'
+import {Button} from '../ui/button'
+import {ChevronsUpDown, Compass, Menu, PlusCircleIcon} from 'lucide-react'
 import clsx from 'clsx'
-import { AspectRatio } from '../ui/aspect-ratio'
+import {AspectRatio} from '../ui/aspect-ratio'
 import Image from 'next/image'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '../ui/command'
+import {Popover, PopoverContent, PopoverTrigger} from '../ui/popover'
+import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList,} from '../ui/command'
 import Link from 'next/link'
-import { twMerge } from 'tailwind-merge'
-import { useModal } from '@/providers/modal-provider'
+import {useModal} from '@/providers/modal-provider'
 import CustomModal from '../global/custom-modal'
 import SubAccountDetails from '../forms/subaccount-details'
-import { Separator } from '../ui/separator'
-import { icons } from '@/lib/constants'
+import {Separator} from '../ui/separator'
+import {icons} from '@/lib/constants'
 
 type Props = {
   defaultOpen?: boolean
@@ -109,7 +96,10 @@ const MenuOptions = ({
                 <div className="flex items-center text-left gap-2">
                   <Compass />
                   <div className="flex flex-col">
+                    <span class={'text-wrap'}>
+
                     {details.name}
+                    </span>
                     <span className="text-muted-foreground">
                       {details.address}
                     </span>
@@ -125,13 +115,13 @@ const MenuOptions = ({
             </PopoverTrigger>
             <PopoverContent className="w-80 h-80 mt-4 z-[200]">
               <Command className="rounded-lg">
-                <CommandInput placeholder="Search Accounts..." />
+                <CommandInput placeholder="Поиск аккаунта..." />
                 <CommandList className="pb-16">
-                  <CommandEmpty> No results found</CommandEmpty>
+                  <CommandEmpty> Ничего не найдено</CommandEmpty>
                   {(user?.role === 'AGENCY_OWNER' ||
                     user?.role === 'AGENCY_ADMIN') &&
                     user?.Agency && (
-                      <CommandGroup heading="Agency">
+                      <CommandGroup heading="Агенство">
                         <CommandItem className="!bg-transparent my-2 text-primary broder-[1px] border-border p-2 rounded-md hover:!bg-muted cursor-pointer transition-all">
                           {defaultOpen ? (
                             <Link
@@ -179,7 +169,7 @@ const MenuOptions = ({
                         </CommandItem>
                       </CommandGroup>
                     )}
-                  <CommandGroup heading="Accounts">
+                  <CommandGroup heading="Аккаунты">
                     {!!subAccounts
                       ? subAccounts.map((subaccount) => (
                           <CommandItem key={subaccount.id}>
@@ -239,8 +229,8 @@ const MenuOptions = ({
                       onClick={() => {
                         setOpen(
                           <CustomModal
-                            title="Create A Subaccount"
-                            subheading="You can switch between your agency account and the subaccount from the sidebar"
+                            title="Создайте субаккаунт"
+                            subheading="Вы можете переключаться между своим агентским аккаунтом и субаккаунтом на боковой панели"
                           >
                             <SubAccountDetails
                               agencyDetails={user?.Agency as Agency}
@@ -252,20 +242,20 @@ const MenuOptions = ({
                       }}
                     >
                       <PlusCircleIcon size={15} />
-                      Create Sub Account
+                      Создать субаккаунт
                     </Button>
                   </SheetClose>
                 )}
               </Command>
             </PopoverContent>
           </Popover>
-          <p className="text-muted-foreground text-xs mb-2">MENU LINKS</p>
+          <p className="text-muted-foreground text-xs mb-2">Меню</p>
           <Separator className="mb-4" />
           <nav className="relative">
             <Command className="rounded-lg overflow-visible bg-transparent">
-              <CommandInput placeholder="Search..." />
+              <CommandInput placeholder="Поиск..." />
               <CommandList className="py-4 overflow-visible">
-                <CommandEmpty>No Results Found</CommandEmpty>
+                <CommandEmpty>Ничего не найдено</CommandEmpty>
                 <CommandGroup className="overflow-visible">
                   {sidebarOpt.map((sidebarOptions) => {
                     let val

@@ -1,7 +1,7 @@
 'use client'
-import { useModal } from '@/providers/modal-provider'
+import {useModal} from '@/providers/modal-provider'
 import React from 'react'
-import { Button } from '../ui/button'
+import {Button} from '../ui/button'
 import CustomModal from '../global/custom-modal'
 import UploadMediaForm from '../forms/upload-media'
 
@@ -17,15 +17,15 @@ const MediaUploadButton = ({ subaccountId }: Props) => {
       onClick={() => {
         setOpen(
           <CustomModal
-            title="Upload Media"
-            subheading="Upload a file to your media bucket"
+            title="Загрузить файлы"
+            subheading="Загрузите медиа в ваше хранилище"
           >
             <UploadMediaForm subaccountId={subaccountId}></UploadMediaForm>
           </CustomModal>
         )
       }}
     >
-      Upload
+      Загрузить
     </Button>
   )
 }

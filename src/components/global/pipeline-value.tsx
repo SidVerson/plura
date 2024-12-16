@@ -1,18 +1,10 @@
 'use client'
-import { getPipelines } from '@/lib/queries'
-import { Prisma } from '@prisma/client'
-import React, { useEffect, useMemo, useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader } from '../ui/card'
-import { Progress } from '../ui/progress'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select'
+import {getPipelines} from '@/lib/queries'
+import {Prisma} from '@prisma/client'
+import React, {useEffect, useMemo, useState} from 'react'
+import {Card, CardContent, CardDescription, CardHeader} from '../ui/card'
+import {Progress} from '../ui/progress'
+import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,} from '../ui/select'
 
 type Props = {
   subaccountId: string
@@ -65,19 +57,19 @@ const PipelineValue = ({ subaccountId }: Props) => {
   return (
     <Card className="relative w-full xl:w-[350px]">
       <CardHeader>
-        <CardDescription>Pipeline Value</CardDescription>
+        <CardDescription>Стоимость пайплайна</CardDescription>
         <small className="text-xs text-muted-foreground">
-          Pipeline Progress
+          Прогресс пайплайна
         </small>
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs text-muted-foreground">
-              Closed ${pipelineClosedValue}
+              Закрыто ${pipelineClosedValue}
             </p>
           </div>
           <div>
             <p className="text-xs text-muted-foreground">
-              Total ${totalPipelineValue + pipelineClosedValue}
+              Всего ${totalPipelineValue + pipelineClosedValue}
             </p>
           </div>
         </div>
@@ -89,8 +81,8 @@ const PipelineValue = ({ subaccountId }: Props) => {
       </CardHeader>
       <CardContent className="text-sm text-muted-foreground">
         <p className="mb-2">
-          Total value of all tickets in the given pipeline except the last lane.
-          Your last lane is considered your closing lane in every pipeline.
+          Общая стоимость всех тикетов в данном пайплайне, кроме последнего лайна.
+          Последний лайн считается вашей завершающей полосой в каждом пайплайне.
         </p>
         <Select
           value={selectedPipelineId}
@@ -101,7 +93,7 @@ const PipelineValue = ({ subaccountId }: Props) => {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Pipelines</SelectLabel>
+              <SelectLabel>Пайплайны</SelectLabel>
               {pipelines.map((pipeline) => (
                 <SelectItem
                   value={pipeline.id}

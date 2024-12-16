@@ -1,5 +1,5 @@
 'use client'
-import { ProgressCircle } from '@tremor/react'
+import {ProgressCircle} from '@tremor/react'
 import React from 'react'
 
 type Props = {
@@ -16,10 +16,10 @@ const CircleProgress = ({ description, value = 0 }: Props) => {
         radius={70}
         strokeWidth={20}
       >
-        {value}%
+        {value ? value : 0}%
       </ProgressCircle>
       <div>
-        <b>Closing Rate</b>
+        <b>Скорость закрытия</b>
         <p className="text-muted-foreground">{description}</p>
       </div>
     </div>

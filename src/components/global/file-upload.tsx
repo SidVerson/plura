@@ -1,8 +1,8 @@
-import { FileIcon, X } from 'lucide-react'
+import {FileIcon, X} from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
-import { Button } from '../ui/button'
-import { UploadDropzone } from '@/lib/uploadthing'
+import {Button} from '../ui/button'
+import {UploadDropzone} from '@/lib/uploadthing'
 
 type Props = {
   apiEndpoint: 'agencyLogo' | 'avatar' | 'subaccountLogo'
@@ -34,7 +34,7 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
               rel="noopener_noreferrer"
               className="ml-2 text-sm text-indigo-500 dark:text-indigo-400 hover:underline"
             >
-              View PDF
+              Просмотреть PDF
             </a>
           </div>
         )}
@@ -44,7 +44,7 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
           type="button"
         >
           <X className="h-4 w-4" />
-          Remove Logo
+          Убрать логотип
         </Button>
       </div>
     )

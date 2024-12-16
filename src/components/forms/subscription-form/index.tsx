@@ -1,9 +1,9 @@
 'use client'
-import { Button } from '@/components/ui/button'
-import { useToast } from '@/components/ui/use-toast'
-import { Plan } from '@prisma/client'
-import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import React, { useState } from 'react'
+import {Button} from '@/components/ui/button'
+import {useToast} from '@/components/ui/use-toast'
+import {Plan} from '@prisma/client'
+import {PaymentElement, useElements, useStripe} from '@stripe/react-stripe-js'
+import React, {useState} from 'react'
 
 type Props = {
   selectedPriceId: string | Plan
@@ -17,7 +17,7 @@ const SubscriptionForm = ({ selectedPriceId }: Props) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     if (!selectedPriceId) {
-      setPriceError('You need to select a plan to subscribe.')
+      setPriceError('Вы должны выбрать план для подписки.')
       return
     }
     setPriceError('')
@@ -35,31 +35,31 @@ const SubscriptionForm = ({ selectedPriceId }: Props) => {
         throw new Error()
       }
       toast({
-        title: 'Payment successfull',
-        description: 'Your payment has been successfully processed. ',
+        title: 'Оплата успешна',
+        description: 'Ваша оплата была успешно обработана.',
       })
     } catch (error) {
       console.log(error)
       toast({
         variant: 'destructive',
-        title: 'Payment failed',
+        title: 'Ошибка при оплате',
         description:
-          'We couldnt process your payment. Please try a different card',
+            'Не удалось обработать вашу оплату. Пожалуйста, попробуйте использовать другую карту.',
       })
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <small className="text-destructive">{priceError}</small>
-      <PaymentElement />
-      <Button
-        disabled={!stripeHook}
-        className="mt-4 w-full"
-      >
-        Submit
-      </Button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <small className="text-destructive">{priceError}</small>
+        <PaymentElement />
+        <Button
+            disabled={!stripeHook}
+            className="mt-4 w-full"
+        >
+          Отправить
+        </Button>
+      </form>
   )
 }
 export default SubscriptionForm

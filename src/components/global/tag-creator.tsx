@@ -1,7 +1,7 @@
 'use client'
-import { Tag } from '@prisma/client'
-import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import {Tag} from '@prisma/client'
+import {useRouter} from 'next/navigation'
+import React, {useEffect, useState} from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,15 +14,10 @@ import {
   AlertDialogTrigger,
 } from '../ui/alert-dialog'
 import TagComponent from './tag'
-import { PlusCircleIcon, TrashIcon, X } from 'lucide-react'
-import { toast } from '../ui/use-toast'
-import { v4 } from 'uuid'
-import {
-  deleteTag,
-  getTagsForSubaccount,
-  saveActivityLogsNotification,
-  upsertTag,
-} from '@/lib/queries'
+import {PlusCircleIcon, TrashIcon, X} from 'lucide-react'
+import {toast} from '../ui/use-toast'
+import {v4} from 'uuid'
+import {deleteTag, getTagsForSubaccount, saveActivityLogsNotification, upsertTag,} from '@/lib/queries'
 
 import {
   Command,
@@ -72,14 +67,14 @@ const TagCreator = ({ getSelectedTags, subAccountId, defaultTags }: Props) => {
     if (!value) {
       toast({
         variant: 'destructive',
-        title: 'Tags need to have a name',
+        title: 'Теги должны иметь название',
       })
       return
     }
     if (!selectedColor) {
       toast({
         variant: 'destructive',
-        title: 'Please Select a color',
+        title: 'Пожалуйста, выберите цвет',
       })
       return
     }
@@ -98,18 +93,18 @@ const TagCreator = ({ getSelectedTags, subAccountId, defaultTags }: Props) => {
     try {
       const response = await upsertTag(subAccountId, tagData)
       toast({
-        title: 'Created the tag',
+        title: 'Тег создан',
       })
 
       await saveActivityLogsNotification({
         agencyId: undefined,
-        description: `Updated a tag | ${response?.name}`,
+        description: `Тег обновлен | ${response?.name}`,
         subaccountId: subAccountId,
       })
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: 'Could not create tag',
+        title: 'не получается создать тег',
       })
     }
   }
@@ -125,12 +120,12 @@ const TagCreator = ({ getSelectedTags, subAccountId, defaultTags }: Props) => {
       const response = await deleteTag(tagId)
       toast({
         title: 'Deleted tag',
-        description: 'The tag is deleted from your subaccount.',
+        description: 'Тег удален с субаккаунта',
       })
 
       await saveActivityLogsNotification({
         agencyId: undefined,
-        description: `Deleted a tag | ${response?.name}`,
+        description: `Тег удален | ${response?.name}`,
         subaccountId: subAccountId,
       })
 
@@ -138,7 +133,7 @@ const TagCreator = ({ getSelectedTags, subAccountId, defaultTags }: Props) => {
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: 'Could not delete tag',
+        title: 'Не получилось удалить тег',
       })
     }
   }
@@ -178,7 +173,7 @@ const TagCreator = ({ getSelectedTags, subAccountId, defaultTags }: Props) => {
         </div>
         <div className="relative">
           <CommandInput
-            placeholder="Search for tag..."
+            placeholder="Поиск..."
             value={value}
             onValueChange={setValue}
           />
@@ -190,7 +185,7 @@ const TagCreator = ({ getSelectedTags, subAccountId, defaultTags }: Props) => {
         </div>
         <CommandList>
           <CommandSeparator />
-          <CommandGroup heading="Tags">
+          <CommandGroup heading="Теги">
             {tags.map((tag) => (
               <CommandItem
                 key={tag.id}
@@ -212,27 +207,27 @@ const TagCreator = ({ getSelectedTags, subAccountId, defaultTags }: Props) => {
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle className="text-left">
-                      Are you absolutely sure?
+                      Вы точно уверены?
                     </AlertDialogTitle>
                     <AlertDialogDescription className="text-left">
-                      This action cannot be undone. This will permanently delete
-                      your the tag and remove it from our servers.
+                      Это действие нельзя отменить. Это приведет к окончательному удалению
+                      ваш тег и удалит его с наших серверов.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter className="items-center">
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel>Отмена</AlertDialogCancel>
                     <AlertDialogAction
                       className="bg-destructive"
                       onClick={() => handleDeleteTag(tag.id)}
                     >
-                      Delete Tag
+                      Удалить тег
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </CommandItem>
             ))}
           </CommandGroup>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>Ничего не найдено.</CommandEmpty>
         </CommandList>
       </Command>
     </AlertDialog>

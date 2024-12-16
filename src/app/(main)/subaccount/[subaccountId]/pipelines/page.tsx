@@ -1,6 +1,5 @@
-import { db } from '@/lib/db'
-import { redirect } from 'next/navigation'
-import React from 'react'
+import {db} from '@/lib/db'
+import {redirect} from 'next/navigation'
 
 type Props = {
   params: { subaccountId: string }
@@ -18,7 +17,7 @@ const Pipelines = async ({ params }: Props) => {
 
   try {
     const response = await db.pipeline.create({
-      data: { name: 'First Pipeline', subAccountId: params.subaccountId },
+      data: { name: 'Первый пайплайн', subAccountId: params.subaccountId },
     })
 
     return redirect(

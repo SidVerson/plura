@@ -1,30 +1,30 @@
 'use client'
-import { Media } from '@prisma/client'
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import {Media} from '@prisma/client'
+import {useRouter} from 'next/navigation'
+import React, {useState} from 'react'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { Copy, MoreHorizontal, Trash } from 'lucide-react'
+import {Copy, MoreHorizontal, Trash} from 'lucide-react'
 import Image from 'next/image'
-import { deleteMedia, saveActivityLogsNotification } from '@/lib/queries'
-import { toast } from '../ui/use-toast'
+import {deleteMedia, saveActivityLogsNotification} from '@/lib/queries'
+import {toast} from '../ui/use-toast'
 
 type Props = { file: Media }
 
@@ -58,7 +58,7 @@ const MediaCard = ({ file }: Props) => {
           </div>
 
           <DropdownMenuContent>
-            <DropdownMenuLabel>Menu</DropdownMenuLabel>
+            <DropdownMenuLabel>Меню</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="flex gap-2"
@@ -67,11 +67,11 @@ const MediaCard = ({ file }: Props) => {
                 toast({ title: 'Copied To Clipboard' })
               }}
             >
-              <Copy size={15} /> Copy Image Link
+              <Copy size={15} /> Скопировать ссылку на изображение
             </DropdownMenuItem>
             <AlertDialogTrigger asChild>
               <DropdownMenuItem className="flex gap-2">
-                <Trash size={15} /> Delete File
+                <Trash size={15} /> Удалить файл
               </DropdownMenuItem>
             </AlertDialogTrigger>
           </DropdownMenuContent>
@@ -80,15 +80,15 @@ const MediaCard = ({ file }: Props) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-left">
-            Are you absolutely sure?
+            Вы точно уверены?
           </AlertDialogTitle>
           <AlertDialogDescription className="text-left">
-            Are you sure you want to delete this file? All subaccount using this
-            file will no longer have access to it!
+            Вы уверены, что хотите удалить этот файл? Все субаккаунты, использующие этот
+            файл, больше не будут иметь к нему доступа!
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="flex items-center">
-          <AlertDialogCancel className="mb-2">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="mb-2">Отменить</AlertDialogCancel>
           <AlertDialogAction
             disabled={loading}
             className="bg-destructive hover:bg-destructive"
@@ -101,14 +101,14 @@ const MediaCard = ({ file }: Props) => {
                 subaccountId: response.subAccountId,
               })
               toast({
-                title: 'Deleted File',
-                description: 'Successfully deleted the file',
+                title: 'Файл удален',
+                description: 'Файл успешно удален',
               })
               setLoading(false)
               router.refresh()
             }}
           >
-            Delete
+            Удалить
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

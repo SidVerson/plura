@@ -2,28 +2,14 @@ import BlurPage from '@/components/global/blur-page'
 import CircleProgress from '@/components/global/circle-progress'
 import PipelineValue from '@/components/global/pipeline-value'
 import SubaccountFunnelChart from '@/components/global/subaccount-funnel-chart'
-import { Badge } from '@/components/ui/badge'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import {Badge} from '@/components/ui/badge'
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from '@/components/ui/card'
 
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { db } from '@/lib/db'
-import { stripe } from '@/lib/stripe'
-import { AreaChart, BadgeDelta } from '@tremor/react'
-import { ClipboardIcon, Contact2, DollarSign, ShoppingCart } from 'lucide-react'
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from '@/components/ui/table'
+import {db} from '@/lib/db'
+import {stripe} from '@/lib/stripe'
+import {AreaChart, BadgeDelta} from '@tremor/react'
+import {ClipboardIcon, Contact2, DollarSign, ShoppingCart} from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -128,16 +114,16 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
           <div className="absolute -top-10 -left-10 right-0 bottom-0 z-30 flex items-center justify-center backdrop-blur-md bg-background/50">
             <Card>
               <CardHeader>
-                <CardTitle>Connect Your Stripe</CardTitle>
+                <CardTitle>Подключите stripe</CardTitle>
                 <CardDescription>
-                  You need to connect your stripe account to see metrics
+                  Чтобы увидеть метрики, необходимо подключить аккаунт stripe.
                 </CardDescription>
                 <Link
                   href={`/subaccount/${subaccountDetails.id}/launchpad`}
                   className="p-2 w-fit bg-secondary text-white rounded-md flex items-center gap-2"
                 >
                   <ClipboardIcon />
-                  Launch Pad
+                  Главная
                 </Link>
               </CardHeader>
             </Card>
@@ -147,33 +133,33 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
           <div className="flex gap-4 flex-col xl:!flex-row">
             <Card className="flex-1 relative">
               <CardHeader>
-                <CardDescription>Income</CardDescription>
+                <CardDescription>Доход</CardDescription>
                 <CardTitle className="text-4xl">
                   {net ? `${currency} ${net.toFixed(2)}` : `$0.00`}
                 </CardTitle>
                 <small className="text-xs text-muted-foreground">
-                  For the year {currentYear}
+                  За год {currentYear}
                 </small>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
-                Total revenue generated as reflected in your stripe dashboard.
+                Общий доход, отраженный на панели инструментов stripe.
               </CardContent>
               <DollarSign className="absolute right-4 top-4 text-muted-foreground" />
             </Card>
             <Card className="flex-1 relative">
               <CardHeader>
-                <CardDescription>Potential Income</CardDescription>
+                <CardDescription>Потенциальный доход</CardDescription>
                 <CardTitle className="text-4xl">
                   {potentialIncome
                     ? `${currency} ${potentialIncome.toFixed(2)}`
                     : `$0.00`}
                 </CardTitle>
                 <small className="text-xs text-muted-foreground">
-                  For the year {currentYear}
+                  За год {currentYear}
                 </small>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
-                This is how much you can close.
+                Именно столько вы можете закрыть.
               </CardContent>
               <Contact2 className="absolute right-4 top-4 text-muted-foreground" />
             </Card>
@@ -181,14 +167,14 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
 
             <Card className="xl:w-fit">
               <CardHeader>
-                <CardDescription>Conversions</CardDescription>
+                <CardDescription>Конверсия</CardDescription>
                 <CircleProgress
                   value={closingRate}
                   description={
                     <>
                       {sessions && (
                         <div className="flex flex-col">
-                          Total Carts Opened
+                          Всего открытых корзин
                           <div className="flex gap-2">
                             <ShoppingCart className="text-rose-700" />
                             {sessions.length}
@@ -197,7 +183,7 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
                       )}
                       {totalClosedSessions && (
                         <div className="flex flex-col">
-                          Won Carts
+                          Успешные корзины
                           <div className="flex gap-2">
                             <ShoppingCart className="text-emerald-700" />
                             {totalClosedSessions.length}
@@ -214,25 +200,27 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
           <div className="flex gap-4 flex-col xl:!flex-row">
             <Card className="relative">
               <CardHeader>
-                <CardDescription>Funnel Performance</CardDescription>
+                <CardDescription>Производительность воронки</CardDescription>
               </CardHeader>
               <CardContent className=" text-sm text-muted-foreground flex flex-col gap-12 justify-between ">
                 <SubaccountFunnelChart data={funnelPerformanceMetrics} />
                 <div className="lg:w-[150px]">
-                  Total page visits across all funnels. Hover over to get more
-                  details on funnel page performance.
+                  Общее количество посещений страниц по всем воронкам. Наведите курсор, чтобы получить более
+                  подробную информацию о производительности страниц воронки.
+
                 </div>
               </CardContent>
               <Contact2 className="absolute right-4 top-4 text-muted-foreground" />
             </Card>
             <Card className="p-4 flex-1">
               <CardHeader>
-                <CardTitle>Checkout Activity</CardTitle>
+                <CardTitle>Деятельность по оформлению заказа</CardTitle>
               </CardHeader>
               <AreaChart
                 className="text-sm stroke-primary"
                 data={sessions || []}
                 index="created"
+                noDataText={'Нет данных'}
                 categories={['amount_total']}
                 colors={['primary']}
                 yAxisWidth={30}
@@ -244,7 +232,7 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
             <Card className="p-4 flex-1 h-[450px] overflow-scroll relative">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  Transition History
+                  История переходов
                   <BadgeDelta
                     className="rounded-xl bg-transparent"
                     deltaType="moderateIncrease"
@@ -258,9 +246,9 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
                   <TableHeader className="!sticky !top-0">
                     <TableRow>
                       <TableHead className="w-[300px]">Email</TableHead>
-                      <TableHead className="w-[200px]">Status</TableHead>
-                      <TableHead>Created Date</TableHead>
-                      <TableHead className="text-right">Value</TableHead>
+                      <TableHead className="w-[200px]">Статус</TableHead>
+                      <TableHead> Создано</TableHead>
+                      <TableHead className="text-right">Значение</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody className="font-medium truncate">
@@ -272,7 +260,7 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
                             </TableCell>
                             <TableCell>
                               <Badge className="bg-emerald-500 dark:text-black">
-                                Paid
+                                Оплачено
                               </Badge>
                             </TableCell>
                             <TableCell>
@@ -287,7 +275,7 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
                             </TableCell>
                           </TableRow>
                         ))
-                      : 'No Data'}
+                      : 'Нет данных'}
                   </TableBody>
                 </Table>
               </CardHeader>

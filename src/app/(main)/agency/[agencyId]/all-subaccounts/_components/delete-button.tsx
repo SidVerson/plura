@@ -1,10 +1,6 @@
 'use client'
-import {
-  deleteSubAccount,
-  getSubaccountDetails,
-  saveActivityLogsNotification,
-} from '@/lib/queries'
-import { useRouter } from 'next/navigation'
+import {deleteSubAccount, getSubaccountDetails, saveActivityLogsNotification,} from '@/lib/queries'
+import {useRouter} from 'next/navigation'
 import React from 'react'
 
 type Props = {
@@ -21,14 +17,14 @@ const DeleteButton = ({ subaccountId }: Props) => {
         const response = await getSubaccountDetails(subaccountId)
         await saveActivityLogsNotification({
           agencyId: undefined,
-          description: `Deleted a subaccount | ${response?.name}`,
+          description: `Удалить субаккаунт | ${response?.name}`,
           subaccountId,
         })
         await deleteSubAccount(subaccountId)
         router.refresh()
       }}
     >
-      Delete Sub Account
+      Удалить субаккаунт
     </div>
   )
 }

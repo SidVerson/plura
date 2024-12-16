@@ -1,8 +1,8 @@
 import AgencyDetails from '@/components/forms/agency-details'
-import { getAuthUserDetails, verifyAndAcceptInvitation } from '@/lib/queries'
-import { currentUser } from '@clerk/nextjs'
-import { Plan } from '@prisma/client'
-import { redirect } from 'next/navigation'
+import {getAuthUserDetails, verifyAndAcceptInvitation} from '@/lib/queries'
+import {currentUser} from '@clerk/nextjs'
+import {Plan} from '@prisma/client'
+import {redirect} from 'next/navigation'
 import React from 'react'
 
 const Page = async ({
@@ -31,14 +31,14 @@ const Page = async ({
         )
       } else return redirect(`/agency/${agencyId}`)
     } else {
-      return <div>Not authorized</div>
+      return <div>не авторизован</div>
     }
   }
   const authUser = await currentUser()
   return (
     <div className="flex justify-center items-center mt-4">
       <div className="max-w-[850px] border-[1px] p-4 rounded-xl">
-        <h1 className="text-4xl"> Create An Agency</h1>
+        <h1 className="text-4xl"> Создать агенство</h1>
         <AgencyDetails
           data={{ companyEmail: authUser?.emailAddresses[0].emailAddress }}
         />

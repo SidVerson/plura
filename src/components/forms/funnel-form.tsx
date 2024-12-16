@@ -1,38 +1,28 @@
 'use client'
-import React, { useEffect } from 'react'
-import { z } from 'zod'
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { useForm } from 'react-hook-form'
-import { Funnel } from '@prisma/client'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
+import React, {useEffect} from 'react'
+import {z} from 'zod'
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from '@/components/ui/form'
+import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
+import {useForm} from 'react-hook-form'
+import {Funnel} from '@prisma/client'
+import {Input} from '../ui/input'
+import {Textarea} from '../ui/textarea'
 
-import { Button } from '../ui/button'
+import {Button} from '../ui/button'
 import Loading from '../global/loading'
-import { CreateFunnelFormSchema } from '@/lib/types'
-import { saveActivityLogsNotification, upsertFunnel } from '@/lib/queries'
-import { v4 } from 'uuid'
-import { toast } from '../ui/use-toast'
-import { useModal } from '@/providers/modal-provider'
-import { useRouter } from 'next/navigation'
-import { zodResolver } from '@hookform/resolvers/zod'
+import {CreateFunnelFormSchema} from '@/lib/types'
+import {saveActivityLogsNotification, upsertFunnel} from '@/lib/queries'
+import {v4} from 'uuid'
+import {toast} from '../ui/use-toast'
+import {useModal} from '@/providers/modal-provider'
+import {useRouter} from 'next/navigation'
+import {zodResolver} from '@hookform/resolvers/zod'
 import FileUpload from '../global/file-upload'
 
 interface CreateFunnelProps {
   defaultData?: Funnel
   subAccountId: string
 }
-
-//CHALLENGE: Use favicons
 
 const FunnelForm: React.FC<CreateFunnelProps> = ({
   defaultData,
@@ -73,19 +63,19 @@ const FunnelForm: React.FC<CreateFunnelProps> = ({
     )
     await saveActivityLogsNotification({
       agencyId: undefined,
-      description: `Update funnel | ${response.name}`,
+      description: `Обновление воронки | ${response.name}`,
       subaccountId: subAccountId,
     })
     if (response)
       toast({
-        title: 'Success',
-        description: 'Saved funnel details',
+        title: 'Успешно',
+        description: 'Детали воронки сохранены',
       })
     else
       toast({
         variant: 'destructive',
-        title: 'Oppse!',
-        description: 'Could not save funnel details',
+        title: 'Ошибка!',
+        description: 'Не удалось сохранить детали воронки',
       })
     setClose()
     router.refresh()
@@ -93,7 +83,7 @@ const FunnelForm: React.FC<CreateFunnelProps> = ({
   return (
     <Card className="flex-1">
       <CardHeader>
-        <CardTitle>Funnel Details</CardTitle>
+        <CardTitle>Детали воронки</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -107,10 +97,10 @@ const FunnelForm: React.FC<CreateFunnelProps> = ({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Funnel Name</FormLabel>
+                  <FormLabel>Название воронки</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Name"
+                      placeholder="Название"
                       {...field}
                     />
                   </FormControl>
@@ -123,10 +113,10 @@ const FunnelForm: React.FC<CreateFunnelProps> = ({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Funnel Description</FormLabel>
+                  <FormLabel>Описание воронки</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell us a little bit more about this funnel."
+                      placeholder="Расскажите немного больше об этой воронке."
                       {...field}
                     />
                   </FormControl>
@@ -139,10 +129,10 @@ const FunnelForm: React.FC<CreateFunnelProps> = ({
               name="subDomainName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Sub domain</FormLabel>
+                  <FormLabel>Поддомен</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Sub domain for funnel"
+                      placeholder="Поддомен для воронки"
                       {...field}
                     />
                   </FormControl>
@@ -155,7 +145,7 @@ const FunnelForm: React.FC<CreateFunnelProps> = ({
               name="favicon"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Favicon</FormLabel>
+                  <FormLabel>Фавикон</FormLabel>
                   <FormControl>
                     <FileUpload
                       apiEndpoint="subaccountLogo"
@@ -172,7 +162,7 @@ const FunnelForm: React.FC<CreateFunnelProps> = ({
               disabled={isLoading}
               type="submit"
             >
-              {form.formState.isSubmitting ? <Loading /> : 'Save'}
+              {form.formState.isSubmitting ? <Loading /> : 'Сохранить'}
             </Button>
           </form>
         </Form>

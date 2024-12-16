@@ -1,12 +1,12 @@
 'use client'
-import { Badge } from '@/components/ui/badge'
-import { EditorBtns, defaultStyles } from '@/lib/constants'
-import { EditorElement, useEditor } from '@/providers/editor/editor-provider'
+import {Badge} from '@/components/ui/badge'
+import {defaultStyles, EditorBtns} from '@/lib/constants'
+import {EditorElement, useEditor} from '@/providers/editor/editor-provider'
 import clsx from 'clsx'
 import React from 'react'
-import { v4 } from 'uuid'
+import {v4} from 'uuid'
 import Recursive from './recursive'
-import { Trash } from 'lucide-react'
+import {Trash} from 'lucide-react'
 
 type Props = { element: EditorElement }
 
@@ -25,7 +25,7 @@ const Container = ({ element }: Props) => {
           payload: {
             containerId: id,
             elementDetails: {
-              content: { innerText: 'Text Element' },
+              content: { innerText: 'Текстовый элемент' },
               id: v4(),
               name: 'Text',
               styles: {
@@ -44,11 +44,11 @@ const Container = ({ element }: Props) => {
             containerId: id,
             elementDetails: {
               content: {
-                innerText: 'Link Element',
-                href: '#',
+                innerText: 'Ссылка',
+                href: 'https://lms.bsuir.by/login/auth.php?errorcode=4',
               },
               id: v4(),
-              name: 'Link',
+              name: 'Ссылка',
               styles: {
                 color: 'black',
                 ...defaultStyles,
@@ -65,10 +65,10 @@ const Container = ({ element }: Props) => {
             containerId: id,
             elementDetails: {
               content: {
-                src: 'https://www.youtube.com/embed/A3l6YYkXzzg?si=zbcCeWcpq7Cwf8W1',
+                src: 'https://youtu.be/lV0odgAiXfw?si=rXXdH0m4kNmdGmn_',
               },
               id: v4(),
-              name: 'Video',
+              name: 'Видео',
               styles: {},
               type: 'video',
             },
@@ -83,7 +83,7 @@ const Container = ({ element }: Props) => {
             elementDetails: {
               content: [],
               id: v4(),
-              name: 'Container',
+              name: 'Контейнер',
               styles: { ...defaultStyles },
               type: 'container',
             },
@@ -98,7 +98,7 @@ const Container = ({ element }: Props) => {
             elementDetails: {
               content: [],
               id: v4(),
-              name: 'Contact Form',
+              name: 'Контактная форма',
               styles: {},
               type: 'contactForm',
             },
@@ -113,7 +113,7 @@ const Container = ({ element }: Props) => {
             elementDetails: {
               content: [],
               id: v4(),
-              name: 'Contact Form',
+              name: 'Контактная форма',
               styles: {},
               type: 'paymentForm',
             },
@@ -130,20 +130,20 @@ const Container = ({ element }: Props) => {
                 {
                   content: [],
                   id: v4(),
-                  name: 'Container',
+                  name: 'Контейнер',
                   styles: { ...defaultStyles, width: '100%' },
                   type: 'container',
                 },
                 {
                   content: [],
                   id: v4(),
-                  name: 'Container',
+                  name: 'Контейнер',
                   styles: { ...defaultStyles, width: '100%' },
                   type: 'container',
                 },
               ],
               id: v4(),
-              name: 'Two Columns',
+              name: 'Две колонки',
               styles: { ...defaultStyles, display: 'flex' },
               type: '2Col',
             },

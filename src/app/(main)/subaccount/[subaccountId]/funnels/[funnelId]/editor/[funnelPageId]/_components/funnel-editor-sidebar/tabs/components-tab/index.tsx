@@ -1,10 +1,5 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
-import { EditorBtns } from '@/lib/constants'
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from '@/components/ui/accordion'
+import {EditorBtns} from '@/lib/constants'
 import React from 'react'
 import TextPlaceholder from './text-placeholder'
 import ContainerPlaceholder from './container-placeholder'
@@ -25,43 +20,43 @@ const ComponentsTab = (props: Props) => {
   }[] = [
     {
       Component: <TextPlaceholder />,
-      label: 'Text',
+      label: 'Текст',
       id: 'text',
       group: 'elements',
     },
     {
       Component: <ContainerPlaceholder />,
-      label: 'Container',
+      label: 'Контейнер',
       id: 'container',
       group: 'layout',
     },
     {
       Component: <TwoColumnsPlaceholder />,
-      label: '2 Columns',
+      label: '2 Колонки',
       id: '2Col',
       group: 'layout',
     },
     {
       Component: <VideoPlaceholder />,
-      label: 'Video',
+      label: 'Видео',
       id: 'video',
       group: 'elements',
     },
     {
       Component: <ContactFormComponentPlaceholder />,
-      label: 'Contact',
+      label: 'Форма',
       id: 'contactForm',
       group: 'elements',
     },
     {
       Component: <CheckoutPlaceholder />,
-      label: 'Checkout',
+      label: 'Расчет',
       id: 'paymentForm',
       group: 'elements',
     },
     {
       Component: <LinkPlaceholder />,
-      label: 'Link',
+      label: 'Ссылка',
       id: 'link',
       group: 'elements',
     },
@@ -77,7 +72,7 @@ const ComponentsTab = (props: Props) => {
         value="Layout"
         className="px-6 py-0 border-y-[1px]"
       >
-        <AccordionTrigger className="!no-underline">Layout</AccordionTrigger>
+        <AccordionTrigger className="!no-underline">Макет</AccordionTrigger>
         <AccordionContent className="flex flex-wrap gap-2 ">
           {elements
             .filter((element) => element.group === 'layout')
@@ -96,7 +91,7 @@ const ComponentsTab = (props: Props) => {
         value="Elements"
         className="px-6 py-0 "
       >
-        <AccordionTrigger className="!no-underline">Elements</AccordionTrigger>
+        <AccordionTrigger className="!no-underline">Элементы</AccordionTrigger>
         <AccordionContent className="flex flex-wrap gap-2 ">
           {elements
             .filter((element) => element.group === 'elements')

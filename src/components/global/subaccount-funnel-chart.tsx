@@ -1,5 +1,5 @@
 'use client'
-import { DonutChart } from '@tremor/react'
+import {DonutChart} from '@tremor/react'
 import React from 'react'
 
 type Props = { data: any }
@@ -7,7 +7,7 @@ type Props = { data: any }
 const SubaccountFunnelChart = ({ data }: Props) => {
   return (
     <div className="h-fit flex transition-all items-start">
-      <DonutChart
+      <DonutChart noDataText={'Нет данных'}
         className="h-40 w-40"
         data={data}
         category="totalFunnelVisits"

@@ -1,52 +1,25 @@
 'use client'
-import {
-  getSubAccountTeamMembers,
-  saveActivityLogsNotification,
-  searchContacts,
-  upsertTicket,
-} from '@/lib/queries'
-import { TicketFormSchema, TicketWithTags } from '@/lib/types'
-import { useModal } from '@/providers/modal-provider'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Contact, Tag, User } from '@prisma/client'
-import { useRouter } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { toast } from '../ui/use-toast'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { CheckIcon, ChevronsUpDownIcon, User2 } from 'lucide-react'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import { Button } from '../ui/button'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from '../ui/command'
-import { cn } from '@/lib/utils'
+import {getSubAccountTeamMembers, saveActivityLogsNotification, searchContacts, upsertTicket,} from '@/lib/queries'
+import {TicketFormSchema, TicketWithTags} from '@/lib/types'
+import {useModal} from '@/providers/modal-provider'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Contact, Tag, User} from '@prisma/client'
+import {useRouter} from 'next/navigation'
+import React, {useEffect, useRef, useState} from 'react'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
+import {toast} from '../ui/use-toast'
+import {Card, CardContent, CardHeader, CardTitle} from '../ui/card'
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from '@/components/ui/form'
+import {Input} from '../ui/input'
+import {Textarea} from '../ui/textarea'
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from '@/components/ui/select'
+import {Avatar, AvatarFallback, AvatarImage} from '../ui/avatar'
+import {CheckIcon, ChevronsUpDownIcon, User2} from 'lucide-react'
+import {Popover, PopoverContent, PopoverTrigger} from '../ui/popover'
+import {Button} from '../ui/button'
+import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem,} from '../ui/command'
+import {cn} from '@/lib/utils'
 import Loading from '../global/loading'
 import TagCreator from '../global/tag-creator'
 
@@ -126,21 +99,21 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
 
       await saveActivityLogsNotification({
         agencyId: undefined,
-        description: `Updated a ticket | ${response?.name}`,
+        description: `Тикет обновлен | ${response?.name}`,
         subaccountId,
       })
 
       toast({
-        title: 'Success',
-        description: 'Saved  details',
+        title: 'Успех',
+        description: 'сохранено',
       })
       if (response) getNewTicket(response)
       router.refresh()
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: 'Oppse!',
-        description: 'Could not save pipeline details',
+        title: 'Упс!',
+        description: 'не получилось сохранить',
       })
     }
     setClose()
@@ -149,7 +122,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Ticket Details</CardTitle>
+        <CardTitle>Тикет</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -163,10 +136,10 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ticket Name</FormLabel>
+                  <FormLabel>Название тикета</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Name"
+                      placeholder="Название"
                       {...field}
                     />
                   </FormControl>
@@ -180,10 +153,10 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Описание</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Description"
+                      placeholder="описание"
                       {...field}
                     />
                   </FormControl>
@@ -197,10 +170,10 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
               name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ticket Value</FormLabel>
+                  <FormLabel>Значение</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Value"
+                      placeholder="Значение"
                       {...field}
                     />
                   </FormControl>
@@ -208,13 +181,13 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                 </FormItem>
               )}
             />
-            <h3>Add tags</h3>
+            <h3>Добавить теги</h3>
             <TagCreator
               subAccountId={subaccountId}
               getSelectedTags={setTags}
               defaultTags={defaultData.ticket?.Tags || []}
             />
-            <FormLabel>Assigned To Team Member</FormLabel>
+            <FormLabel>Назначен членом команды</FormLabel>
             <Select
               onValueChange={setAssignedTo}
               defaultValue={assignedTo}
@@ -231,8 +204,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                       </Avatar>
 
                       <span className="text-sm text-muted-foreground">
-                        Not Assigned
-                      </span>
+                        Не назначено                      </span>
                     </div>
                   }
                 />
@@ -262,7 +234,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                 ))}
               </SelectContent>
             </Select>
-            <FormLabel>Customer</FormLabel>
+            <FormLabel>Клиент</FormLabel>
             <Popover>
               <PopoverTrigger
                 asChild
@@ -275,14 +247,14 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                 >
                   {contact
                     ? contactList.find((c) => c.id === contact)?.name
-                    : 'Select Customer...'}
+                    : 'Выбрать клиента...'}
                   <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-[400px] p-0">
                 <Command>
                   <CommandInput
-                    placeholder="Search..."
+                    placeholder="Поиск..."
                     className="h-9"
                     value={search}
                     onChangeCapture={async (value) => {
@@ -300,7 +272,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                       }, 1000)
                     }}
                   />
-                  <CommandEmpty>No Customer found.</CommandEmpty>
+                  <CommandEmpty>Ничего не найдено.</CommandEmpty>
                   <CommandGroup>
                     {contactList.map((c) => (
                       <CommandItem
@@ -330,7 +302,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
               disabled={isLoading}
               type="submit"
             >
-              {form.formState.isSubmitting ? <Loading /> : 'Save'}
+              {form.formState.isSubmitting ? <Loading /> : 'Сохранить'}
             </Button>
           </form>
         </Form>
